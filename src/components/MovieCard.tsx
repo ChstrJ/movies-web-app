@@ -1,22 +1,22 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { getImagePath } from "@/lib/utils";
 
+type MovieCardProps = {
+  img: string,
+  title: string
+}
 
-const MovieCard = ({ img }) => {
+const MovieCard = ({ img, title }: MovieCardProps) => {
+  const src = getImagePath();
   return (
-    <Card>
+    <div className="relative aspect-[2/3] overflow-hidden">
+      <img
+        src={`${src}/w500/${img}`}
+        alt={title}
+        className="object-cover w-full h-full transition-transform duration-200 hover:scale-110"
+      />
+    </div>
 
-
-    </Card>
-  )
+  );
 };
 
-
 export default MovieCard;
-
