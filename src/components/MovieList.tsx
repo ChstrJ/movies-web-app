@@ -1,4 +1,4 @@
-import { fetchPopularMovies, fetchTopRatedMovies, searchMovies } from "@/services/movieService";
+import { fetchPopularMovies, fetchPopularTvShows, fetchTopRatedMovies, searchMovies } from "@/services/movieService";
 import { useQuery } from '@tanstack/react-query';
 import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ const MovieList = () => {
 
     const { data: movies, error, isLoading } = useQuery({
         queryKey: ['movies'],
-        queryFn: () => searchMovies('sonic', page)
+        queryFn: () => fetchPopularMovies(page)
     })
 
     console.log(movies)
@@ -20,7 +20,7 @@ const MovieList = () => {
     }
 
     return (
-        <div className="grid grid-cols-6">
+        <div className="grid grid-cols-3 lg:grid-cols-6">
             {movies.map((movie) => (
                 <Link to={`/movie/${movie.id}`} key={movie.id}>
                     <MovieCard img={movie.poster_path} title={movie.title} />
