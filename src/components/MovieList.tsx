@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const MovieList = () => {
-    const [page, setPage] = useState(1);
+    const [state, setState] = useState({
+        page: 5
+    });
 
     const { data: movies, error, isLoading } = useQuery({
         queryKey: ['movies'],
-        queryFn: () => fetchPopularMovies(page)
+        queryFn: () => fetchPopularMovies(state.page)
     })
 
     console.log(movies)
