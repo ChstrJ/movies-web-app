@@ -1,9 +1,16 @@
-
 const MainLayout = () => {
   return (
-    <main>
+    <div>
+      <header>
+        <nav>
+        </nav>
 
-    </main>
+      </header>
+      <main>
+
+      </main>
+
+    </div>
   )
 }
 
