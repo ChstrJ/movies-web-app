@@ -1,10 +1,8 @@
-import { useState } from "react";
+import React from "react";
 import { Link, useLocation, Navigate } from "react-router-dom";
 
-const MainLayout = ({ children }) => {
+const MainLayout = (children: React.ReactNode) => {
   const location = useLocation();
-
-  const [activeTab, setActiveTab] = useState("movies");
 
   if (location.pathname === '/') {
     return <Navigate to={'/movies'} />
