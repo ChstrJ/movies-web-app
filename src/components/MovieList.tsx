@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
 import React, { useCallback, useState } from "react";
 import { Input } from "./ui/input";
-import _ from 'lodash';
+import * as _ from 'lodash';
 import { Search } from 'lucide-react';
 
 const MovieList = () => {
