@@ -4,24 +4,32 @@ import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
 import React, { useCallback, useState } from "react";
 import { Input } from "./ui/input";
+import _ from 'lodash';
+import { Search } from 'lucide-react';
 
 const MovieList = () => {
     const [state, setState] = useState({
         page: 5,
         search: '',
-        submittedSearch: '',
+        searchInput: '',
     });
 
     const { data: movies, error, isLoading } = useQuery({
-        queryKey: ['movies', state.submittedSearch, state.page],
-        queryFn: state.submittedSearch
-            ? () => searchMovies(state.submittedSearch, state.page)
+        queryKey: ['movies', state.search, state.page],
+        queryFn: state.search
+            ? () => searchMovies(state.search, state.page)
             : () => fetchPopularMovies(state.page)
     })
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setState((prevState) => ({ ...prevState, submittedSearch: prevState.search }))
+    const searchDebounce = useCallback(
+        _.debounce((value) => setState((prevState) => ({ ...prevState, search: value })), 1000),
+        []
+    );
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        searchDebounce(value);
+        setState({ ...state, searchInput: value });
     }
 
     if (isLoading) {
@@ -31,15 +39,19 @@ const MovieList = () => {
     return (
         <div className="flex flex-col">
             <div className="border border-red-500 items-center flex justify-end">
-                <form onSubmit={handleSubmit}>
-                    <Input
-                        className="m-2 w-42"
-                        type="text"
-                        placeholder="Search for movies..."
-                        value={state.search}
-                        onChange={(e) => setState({ ...state, search: e.target.value })}
-                    />
-                </form>
+                <Input
+                    className="m-2 w-42"
+                    type="text"
+                    placeholder="Search for movies..."
+                    value={state.searchInput}
+                    onChange={handleChange}
+                />
+                <span className="inline-block items-center">
+                    {isLoading
+                        ? <p>Loading...</p>
+                        : <Search size={20} />
+                    }
+                </span>
             </div>
 
             <div className="grid grid-cols-3 lg:grid-cols-6">
