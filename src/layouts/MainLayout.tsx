@@ -1,7 +1,7 @@
-import React from "react";
+import { MainLayoutProps } from "@/lib/types";
 import { Link, useLocation, Navigate } from "react-router-dom";
 
-const MainLayout = (children: React.ReactNode) => {
+const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation();
 
   if (location.pathname === '/') {

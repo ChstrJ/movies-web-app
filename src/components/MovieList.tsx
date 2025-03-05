@@ -6,6 +6,7 @@ import React, { useCallback, useState } from "react";
 import { Input } from "./ui/input";
 import { debounce } from 'lodash';
 import { Search } from 'lucide-react';
+import { TMDB } from "@/lib/types";
 
 const MovieList = () => {
     const [state, setState] = useState({
@@ -14,7 +15,7 @@ const MovieList = () => {
         searchInput: '',
     });
 
-    const { data: movies, isLoading } = useQuery({
+    const { data: movies, isLoading } = useQuery<TMDB[]>({
         queryKey: ['movies', state.search, state.page],
         queryFn: state.search
             ? () => searchMovies(state.search, state.page)

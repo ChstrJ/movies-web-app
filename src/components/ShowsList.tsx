@@ -3,13 +3,14 @@ import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { fetchPopularTvShows } from '@/services/movieService';
+import { TMDB } from '@/lib/types';
 
 const ShowsList = () => {
   const [state] = useState({
     page: 5
   });
 
-  const { data: shows, isLoading } = useQuery({
+  const { data: shows, isLoading } = useQuery<TMDB[]>({
     queryKey: ['shows'],
     queryFn: () => fetchPopularTvShows(state.page)
   })
