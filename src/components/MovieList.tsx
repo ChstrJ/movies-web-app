@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
 import React, { useCallback, useState } from "react";
 import { Input } from "./ui/input";
-import * as _ from 'lodash';
+import { debounce } from 'lodash';
 import { Search } from 'lucide-react';
 
 const MovieList = () => {
@@ -22,7 +22,7 @@ const MovieList = () => {
     })
 
     const searchDebounce = useCallback(
-        _.debounce((value) => setState((prevState) => ({ ...prevState, search: value })), 1000),
+        debounce((value) => setState((prevState) => ({ ...prevState, search: value })), 1000),
         []
     );
 
