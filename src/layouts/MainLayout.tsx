@@ -1,25 +1,31 @@
+import { useState } from "react";
+import { Link, useLocation, Navigate } from "react-router-dom";
+
 const MainLayout = ({ children }) => {
+  const location = useLocation();
+
+  const [activeTab, setActiveTab] = useState("movies");
+
+  if (location.pathname === '/') {
+    return <Navigate to={'/movies'} />
+  }
+
   return (
-    <div className="h-screen bg-gray-400 p-8 flex flex-col antialiased">
+    <div className="h-screen flex flex-col antialiased">
       {/* Header */}
-      <header className="bg-blue-600 text-white p-4 flex justify-around items-center">
-        <nav className="space-x-24">
-          <a href="#" className="text-white hover:text-gray-300">Home</a>
-          <a href="#" className="text-white hover:text-gray-300">About</a>
-          <a href="#" className="text-white hover:text-gray-300">Services</a>
-          <a href="#" className="text-white hover:text-gray-300">Contact</a>
+      <header className="flex justify-around border border-red-500">
+        <nav className="sticky top-0 z-50 space-x-12 m-2">
+          <Link to={'/movies'} className="text-white hover:text-gray-300">Movies</Link>
+          <Link to={'/shows'} className="text-white hover:text-gray-300">Shows</Link>
         </nav>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 bg-white p-8">
+      <main className="flex-1 bg-white overflow-auto">
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="bg-blue-600 text-white text-center p-4 mt-8">
-        <p>&copy; 2025 My Company. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

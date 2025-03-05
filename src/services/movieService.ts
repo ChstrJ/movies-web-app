@@ -15,7 +15,12 @@ export const fetchPopularMovies = async (totalPages: number = 5) => {
 }
 
 export const fetchPopularTvShows = async (page: number = 1) => {
-  const response = await apiClient.get(`/tv/popular?language=en-US&page=${page.toString()}`);
+  const response = await apiClient.get(`/discover/tv?language=en-US&page=${page.toString()}`);
+  return response.data.results;
+}
+
+export const fetchSeriesById = async (id: number) => {
+  const response = await apiClient.get(`/tv/${id}`);
   return response.data.results;
 }
 
@@ -26,5 +31,10 @@ export const fetchTopRatedMovies = async (page: number = 1) => {
 
 export const searchMovies = async (keyword: string, page: number = 1) => {
   const response = await apiClient.get(`/search/movie?query=${keyword}&page=${page.toString()}`);
+  return response.data.results;
+}
+
+export const searchTvShows = async (keyword: string, page: number = 1) => {
+  const response = await apiClient.get(`/search/tv?query=${keyword}&page=${page.toString()}`);
   return response.data.results;
 }
