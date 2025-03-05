@@ -11,7 +11,7 @@ export const fetchPopularMovies = async (totalPages: number = 5) => {
   const responses = await Promise.all(request);
   const data = responses.flatMap((response) => response.data.results);
 
-  return data;
+  return data.slice(0, -4);
 }
 
 export const fetchPopularTvShows = async (page: number = 1) => {
