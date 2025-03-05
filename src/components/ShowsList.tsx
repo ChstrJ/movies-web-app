@@ -1,15 +1,15 @@
-import { fetchPopularMovies, fetchPopularTvShows, fetchTopRatedMovies, searchMovies } from "@/services/movieService";
 import { useQuery } from '@tanstack/react-query';
 import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { fetchPopularTvShows } from '@/services/movieService';
 
 const ShowsList = () => {
-  const [state, setState] = useState({
+  const [state] = useState({
     page: 5
   });
 
-  const { data: shows, error, isLoading } = useQuery({
+  const { data: shows, isLoading } = useQuery({
     queryKey: ['shows'],
     queryFn: () => fetchPopularTvShows(state.page)
   })

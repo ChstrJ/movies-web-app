@@ -1,4 +1,4 @@
-import { fetchPopularMovies, fetchPopularTvShows, fetchTopRatedMovies, searchMovies } from "@/services/movieService";
+import { fetchPopularMovies, searchMovies } from "@/services/movieService";
 import { useQuery } from '@tanstack/react-query';
 import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ const MovieList = () => {
         searchInput: '',
     });
 
-    const { data: movies, error, isLoading } = useQuery({
+    const { data: movies, isLoading } = useQuery({
         queryKey: ['movies', state.search, state.page],
         queryFn: state.search
             ? () => searchMovies(state.search, state.page)

@@ -13,7 +13,7 @@ export function getVideoPath() {
   return import.meta.env.VITE_VIDSRC_BASE_URL;
 }
 
-export function getMovieUrl(id) {
+export function getMovieUrl(id: number) {
   const basePath = getVideoPath();
   console.log(basePath);
   return `${basePath}/movie/${id}`;
