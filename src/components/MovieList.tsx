@@ -39,20 +39,15 @@ const MovieList = () => {
 
     return (
         <div className="flex flex-col">
-            <div className="border border-red-500 items-center flex justify-end">
+            <div className="relative flex items-center">
+                <Search className="absolute ml-4" color="grey" />
                 <Input
-                    className="m-2 w-42"
+                    className="pl-10 m-2"
                     type="text"
                     placeholder="Search for movies..."
                     value={state.searchInput}
                     onChange={handleChange}
                 />
-                <span className="inline-block items-center">
-                    {isLoading
-                        ? <p>Loading...</p>
-                        : <Search size={20} />
-                    }
-                </span>
             </div>
 
             <div className="grid grid-cols-3 lg:grid-cols-6">
