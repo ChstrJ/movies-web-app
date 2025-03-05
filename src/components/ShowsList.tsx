@@ -15,16 +15,13 @@ const ShowsList = () => {
     queryFn: () => fetchPopularTvShows(state.page)
   })
 
-  console.log(shows);
-
-
   if (isLoading) {
     return <p>Loading...</p>
   }
 
   return (
     <div className="grid grid-cols-3 lg:grid-cols-6">
-      {shows.map((show) => (
+      {shows?.map((show) => (
         (show.poster_path && show.id) &&
         <Link to={`/shows/${show.id}`} key={show.id}>
           <MovieCard img={show.poster_path} title={show.title} />
