@@ -15,7 +15,7 @@ const MovieList = () => {
         searchInput: '',
     });
 
-    const { data: movies, isLoading } = useQuery<TMDB[]>({
+    const { data: movies, isLoading } = useQuery<TMDB[] | undefined>({
         queryKey: ['movies', state.search, state.page],
         queryFn: state.search
             ? () => searchMovies(state.search, state.page)

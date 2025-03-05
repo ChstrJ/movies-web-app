@@ -10,7 +10,7 @@ const ShowsList = () => {
     page: 5
   });
 
-  const { data: shows, isLoading } = useQuery<TMDB[]>({
+  const { data: shows, isLoading } = useQuery<TMDB[] | undefined>({
     queryKey: ['shows'],
     queryFn: () => fetchPopularTvShows(state.page)
   })
