@@ -1,51 +1,32 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react";
+import { Link } from "react-router-dom";
+import MovieIcon from "./MovieIcon";
 
-export const AcmeLogo = () => {
-  return (
-    <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-      <path
-        clipRule="evenodd"
-        d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-  );
-};
+
 
 export default function CustomNavbar() {
   return (
-    <Navbar className="backdrop-filter backdrop-blur-lg bg-opacity-30">
+    <Navbar className="backdrop-filter backdrop-blur-lg bg-opacity-30 p-4">
       <NavbarBrand>
-        <AcmeLogo />
-        <p className="font-bold text-inherit">ACME</p>
+        <MovieIcon className='w-6 mr-2' />
+        <p className="font-bold text-xl text-white">Netflix & Chill</p>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
+      <NavbarContent className="gap-4" justify="center">
+        <NavbarItem className="hidden sm:flex">
+          <Link to={'/movies'} className="font-medium p-2 text-white hover:text-gray-400 duration-300 ease-in-out">Movies</Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link aria-current="page" href="#">
-            Customers
-          </Link>
+        <NavbarItem className="hidden sm:flex">
+          <Link to={'/shows'} className="font-medium p-2 text-white rounded-md hover:text-gray-400 duration-200 ease-in-out">Shows</Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
+        {/* <NavbarItem className="hidden sm:flex">
+          <Input
+            className="lg:w-2/12 w-full pl-10 lg:pl-4 lg:pr-10"
+            type="search"
+            placeholder="Search for movies..."
+            value={''}
+          />
+        </NavbarItem> */}
+
       </NavbarContent>
     </Navbar>
   );

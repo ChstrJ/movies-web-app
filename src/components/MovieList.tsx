@@ -6,7 +6,7 @@ import React, { useCallback, useState } from "react";
 import { debounce } from 'lodash';
 import { SearchIcon } from 'lucide-react';
 import { TMDB } from "@/lib/types";
-import { Input } from "@heroui/react";
+import { Input } from "./ui/input";
 
 const MovieList = () => {
     const [state, setState] = useState({
@@ -39,13 +39,13 @@ const MovieList = () => {
 
     return (
         <div className="flex flex-col">
-            <div className="relative flex items-center">
+            <div className="relative flex items-center justify-end backdrop-blur-sm bg-background/30 rounded-md m-2">
+                <SearchIcon color="white" className="absolute left-4 h-4 w-4 lg:left-auto lg:right-4" />
                 <Input
-                    className="m-2"
+                    className="lg:w-2/12 w-full pl-10 lg:pl-4 lg:pr-10 text-white"
                     type="search"
                     placeholder="Search for movies..."
                     value={state.searchInput}
-                    startContent={<SearchIcon className="mr-2" size={18} />}
                     onChange={handleChange}
                 />
             </div>
@@ -60,10 +60,7 @@ const MovieList = () => {
                 ))}
             </div>
 
-            <div className="flex justify-center items-center border border-red-500">
-                <h1>Pagination</h1>
-            </div>
-
+           
         </div>
     )
 

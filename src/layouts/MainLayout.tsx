@@ -1,5 +1,7 @@
 import { MainLayoutProps } from "@/lib/types";
-import { Link, useLocation, Navigate } from "react-router-dom";
+import CustomNavbar from "@/components/CustomNavbar";
+import { Navigate, useLocation } from "react-router-dom";
+import { CustomPagination } from "@/components/CustomPagination";
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation();
@@ -9,27 +11,17 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   }
 
   return (
-    <div className="h-screen flex flex-col antialiased">
-      {/* Header */}
-
-      <header className="flex sticky w-full border border-b justify-between p-4">
-        <nav className="items-center flex">
-          <h1>Icon</h1>
-        </nav>
-
-        <nav className="flex justify-center space-x-12">
-          <Link to={'/movies'} className="text-black hover:text-gray-300">Movies</Link>
-          <Link to={'/shows'} className="text-black hover:text-gray-300">Shows</Link>
-        </nav>
-      </header>
-
-
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+    <div className="min-h-screen flex flex-col antialiased bg-gradient-to-b from-gray-900 to-gray-800">
+      <div className="sticky top-0 z-50">
+        <CustomNavbar />
+      </div>
+      <main className="flex-grow">
         {children}
       </main>
 
-      {/* Footer */}
+      <div className="flex justify-center items-center bg-grey-700 m-1">
+        <CustomPagination />
+      </div>
     </div>
   );
 };

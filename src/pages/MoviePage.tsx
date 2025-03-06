@@ -5,10 +5,8 @@ const MoviePage = () => {
     const { id } = useParams();
     const movieUrl = getMovieUrl(id);
 
-    console.log(movieUrl);
-
     return (
-        <div className="flex justify-center items-center h-screen">
+        <div className="h-screen">
             <iframe
                 src={movieUrl}
                 width="100%"

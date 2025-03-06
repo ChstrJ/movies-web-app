@@ -14,9 +14,19 @@ export const fetchPopularMovies = async (totalPages: number = 5) => {
   return data.slice(0, -4);
 }
 
-export const fetchPopularTvShows = async (page: number = 1) => {
-  const response = await apiClient.get(`/discover/tv?language=en-US&page=${page.toString()}`);
-  return response.data.results;
+export const fetchPopularTvShows = async (totalPages: number = 5) => {
+  let request = [];
+
+
+  for (let page = 1; page <= totalPages; page++) {
+    console.log(`/discover/tv?language=en-US&page=${page}`);
+    request.push(apiClient.get(`/discover/tv?language=en-US&page=${page}`));
+  }
+
+  const requests = await Promise.all(request);
+  const data = requests.flatMap((response) => response.data.results);
+
+  return data.slice(0, -2);
 }
 
 export const fetchSeriesById = async (id: number) => {
