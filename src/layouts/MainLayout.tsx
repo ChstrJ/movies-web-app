@@ -5,7 +5,7 @@ import { CustomPagination } from "@/components/CustomPagination";
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation();
-
+  console.log(location.pathname);
   if (location.pathname === '/') {
     return <Navigate to={'/movies'} />
   }
@@ -19,9 +19,11 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         {children}
       </main>
 
-      <div className="flex justify-center items-center bg-grey-700 m-1">
-        <CustomPagination />
-      </div>
+      {['/movies', '/shows'].includes(location.pathname) &&
+        <div className="flex justify-center items-center m-1">
+          <CustomPagination />
+        </div>
+      }
     </div>
   );
 };

@@ -13,10 +13,10 @@ export default function CustomNavbar() {
       </NavbarBrand>
       <NavbarContent className="gap-4" justify="center">
         <NavbarItem className="hidden sm:flex">
-          <Link to={'/movies'} className="font-medium p-2 text-white hover:text-gray-400 duration-300 ease-in-out">Movies</Link>
+          <Link to={'/movies'} className="text-sm p-2 text-white hover:text-gray-400 duration-300 ease-in-out">Movies</Link>
         </NavbarItem>
         <NavbarItem className="hidden sm:flex">
-          <Link to={'/shows'} className="font-medium p-2 text-white rounded-md hover:text-gray-400 duration-200 ease-in-out">Shows</Link>
+          <Link to={'/shows'} className="text-sm p-2 text-white rounded-md hover:text-gray-400 duration-200 ease-in-out">Shows</Link>
         </NavbarItem>
         {/* <NavbarItem className="hidden sm:flex">
           <Input
