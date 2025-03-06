@@ -45,7 +45,6 @@ const MovieList = () => {
                     type="search"
                     placeholder="Search for movies..."
                     value={state.searchInput}
-                    size="sm"
                     startContent={<SearchIcon className="mr-2" size={18} />}
                     onChange={handleChange}
                 />

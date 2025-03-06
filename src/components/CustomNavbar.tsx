@@ -15,7 +15,7 @@ export const AcmeLogo = () => {
 
 export default function CustomNavbar() {
   return (
-    <Navbar>
+    <Navbar className="backdrop-filter backdrop-blur-lg bg-opacity-30">
       <NavbarBrand>
         <AcmeLogo />
         <p className="font-bold text-inherit">ACME</p>

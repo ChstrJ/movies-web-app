@@ -1,4 +1,3 @@
-import CustomNavbar from "@/components/CustomNavbar";
 import { MainLayoutProps } from "@/lib/types";
 import { Link, useLocation, Navigate } from "react-router-dom";
 
@@ -10,14 +9,17 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   }
 
   return (
-    <div className="bg-gray-800 h-screen flex flex-col antialiased">
+    <div className="h-screen flex flex-col antialiased">
       {/* Header */}
-      <CustomNavbar />
 
-      <header className="flex justify-around border border-red-500">
-        <nav className="sticky top-0 z-50 space-x-12 m-2">
-          <Link to={'/movies'} className="text-white hover:text-gray-300">Movies</Link>
-          <Link to={'/shows'} className="text-white hover:text-gray-300">Shows</Link>
+      <header className="flex sticky w-full border border-b justify-between p-4">
+        <nav className="items-center flex">
+          <h1>Icon</h1>
+        </nav>
+
+        <nav className="flex justify-center space-x-12">
+          <Link to={'/movies'} className="text-black hover:text-gray-300">Movies</Link>
+          <Link to={'/shows'} className="text-black hover:text-gray-300">Shows</Link>
         </nav>
       </header>
 
