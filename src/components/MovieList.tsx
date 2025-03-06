@@ -3,10 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
 import React, { useCallback, useState } from "react";
-import { Input } from "./ui/input";
 import { debounce } from 'lodash';
-import { Search } from 'lucide-react';
+import { SearchIcon } from 'lucide-react';
 import { TMDB } from "@/lib/types";
+import { Input } from "@heroui/react";
 
 const MovieList = () => {
     const [state, setState] = useState({
@@ -40,12 +40,13 @@ const MovieList = () => {
     return (
         <div className="flex flex-col">
             <div className="relative flex items-center">
-                <Search className="absolute ml-4" color="grey" />
                 <Input
-                    className="pl-10 m-2"
-                    type="text"
+                    className="m-2"
+                    type="search"
                     placeholder="Search for movies..."
                     value={state.searchInput}
+                    size="sm"
+                    startContent={<SearchIcon className="mr-2" size={18} />}
                     onChange={handleChange}
                 />
             </div>
