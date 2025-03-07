@@ -3,8 +3,18 @@ import { Link } from "react-router-dom";
 import MovieIcon from "./MovieIcon";
 import { SearchIcon } from "lucide-react";
 import { Input } from "./ui/input";
+import { useSearchStore } from "@/stores/useSearchStore";
+import React from "react";
+import { Popover } from "./ui/popover";
 
 export default function CustomNavbar() {
+  const { searchInput, setSearchInput } = useSearchStore();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSearchInput(e.target.value);
+  }
+
   return (
     <Navbar className="backdrop-filter backdrop-blur-lg bg-opacity-30 p-2 border border-b-gray-700 rounded-b-lg">
       <NavbarBrand>
@@ -28,14 +38,6 @@ export default function CustomNavbar() {
             Shows
           </Link>
         </NavbarItem>
-        {/* <NavbarItem className="hidden sm:flex">
-          <Input
-            className="lg:w-2/12 w-full pl-10 lg:pl-4 lg:pr-10"
-            type="search"
-            placeholder="Search for movies..."
-            value={''}
-          />
-        </NavbarItem> */}
         <NavbarItem>
           <div className="flex items-center justify-end rounded-lg w-full">
             <SearchIcon color="white" size="18" className="absolute mr-3" />
@@ -43,11 +45,10 @@ export default function CustomNavbar() {
               className="w-full text-white bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
               type="search"
               placeholder="Search for anything..."
-              value=""
+              value={searchInput}
+              onChange={handleChange}
             />
           </div>
-
-
         </NavbarItem>
       </NavbarContent>
     </Navbar>
