@@ -15,7 +15,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <div className="sticky top-0 z-50">
         <CustomNavbar />
       </div>
-      <main className="flex-grow">
+      <main className="flex-1">
         {children}
       </main>
 

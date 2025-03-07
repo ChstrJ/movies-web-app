@@ -42,7 +42,7 @@ const MovieList = () => {
             <div className="relative flex items-center justify-end backdrop-blur-sm bg-background/30 rounded-md m-2">
                 <SearchIcon color="white" className="absolute left-4 h-4 w-4 lg:left-auto lg:right-4" />
                 <Input
-                    className="lg:w-2/12 w-full pl-10 lg:pl-4 lg:pr-10 text-white"
+                    className="lg:w-2/12 w-full pl-10 lg:pl-4 lg:pr-10 text-white bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
                     type="search"
                     placeholder="Search for movies..."
                     value={state.searchInput}
@@ -60,7 +60,7 @@ const MovieList = () => {
                 ))}
             </div>
 
-           
+
         </div>
     )
 
