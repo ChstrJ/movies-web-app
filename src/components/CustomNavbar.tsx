@@ -7,7 +7,7 @@ export default function CustomNavbar() {
     <Navbar className="backdrop-filter backdrop-blur-lg bg-opacity-30 p-2 border border-b-gray-700 rounded-b-lg">
       <NavbarBrand>
         <MovieIcon className="w-6 mr-2" />
-        <p className="font-bold text-xl text-white">Netpleks & Chill</p>
+        <p className="font-bold text-lg text-white">Netpleks & Chill</p>
       </NavbarBrand>
       <NavbarContent className="gap-4" justify="center">
         <NavbarItem className="hidden sm:flex">
