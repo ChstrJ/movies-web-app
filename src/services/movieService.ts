@@ -56,3 +56,17 @@ export const searchTvShows = async (keyword: string, page: number = 1) => {
   const response = await apiClient.get(`/search/tv?query=${keyword}&page=${page.toString()}`);
   return response.data.results;
 }
+
+export const searchMulti = async (keyword: string, totalPages: number = 5) => {
+  let request = [];
+
+  for (let page = 1; page <= totalPages; page++) {
+    request.push(apiClient.get(`/search/multi?query=${encodeURI(keyword)}&page=${page}`));
+  }
+
+  const responses = await Promise.all(request);
+  const data = responses.flatMap((response) => response.data.results)
+
+  return data.slice(0, -4);
+}
+

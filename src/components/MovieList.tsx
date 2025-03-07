@@ -23,7 +23,10 @@ const MovieList = () => {
     })
 
     const searchDebounce = useCallback(
-        debounce((value) => setState((prevState) => ({ ...prevState, search: value })), 1000),
+        debounce(
+            (value) => setState((prevState) => ({ ...prevState, search: value })
+            ), 1000
+        ),
         []
     );
 

@@ -1,6 +1,8 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react";
 import { Link } from "react-router-dom";
 import MovieIcon from "./MovieIcon";
+import { SearchIcon } from "lucide-react";
+import { Input } from "./ui/input";
 
 export default function CustomNavbar() {
   return (
@@ -34,6 +36,19 @@ export default function CustomNavbar() {
             value={''}
           />
         </NavbarItem> */}
+        <NavbarItem>
+          <div className="flex items-center justify-end rounded-lg w-full">
+            <SearchIcon color="white" size="18" className="absolute mr-3" />
+            <Input
+              className="w-full text-white bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
+              type="search"
+              placeholder="Search for anything..."
+              value=""
+            />
+          </div>
+
+
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );
