@@ -4,15 +4,35 @@ import MovieIcon from "./MovieIcon";
 import { SearchIcon } from "lucide-react";
 import { Input } from "./ui/input";
 import { useSearchStore } from "@/stores/useSearchStore";
-import React from "react";
-import { Popover } from "./ui/popover";
+import React, { useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { searchMulti } from "@/services/movieService";
+import SearchResult from "./SearchResult";
+import { Search } from "@/lib/types";
+import { debounce } from "lodash";
+
 
 export default function CustomNavbar() {
-  const { searchInput, setSearchInput } = useSearchStore();
+  const { searchInput, userInput, setSearchInput, setUserInput } = useSearchStore();
+
+  const { data: results, isLoading } = useQuery<Search[]>({
+    queryKey: ['all', searchInput],
+    queryFn: () => searchMulti(searchInput)
+  })
+
+  if (isLoading) {
+    <p>Loading...</p>
+  }
+
+  const searchDebounce = useCallback(
+    debounce((value) => setSearchInput(value), 1000),
+    []
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setSearchInput(e.target.value);
+    searchDebounce(e.target.value);
+    setUserInput(e.target.value);
   }
 
   return (
@@ -45,10 +65,13 @@ export default function CustomNavbar() {
               className="w-full text-white bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
               type="search"
               placeholder="Search for anything..."
-              value={searchInput}
+              value={userInput}
               onChange={handleChange}
             />
           </div>
+          {(searchInput.length > 0 && results?.length) &&
+            <SearchResult results={results} />
+          }
         </NavbarItem>
       </NavbarContent>
     </Navbar>

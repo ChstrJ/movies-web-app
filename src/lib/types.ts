@@ -1,8 +1,12 @@
 import React from "react"
 
 export type TMDB = {
-  id: number,
-  poster_path: string,
+  id?: number,
+  poster_path?: string,
+  title?: string
+}
+
+export type Search = {
   title: string
 }
 
