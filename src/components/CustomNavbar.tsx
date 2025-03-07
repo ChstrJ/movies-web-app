@@ -4,7 +4,7 @@ import MovieIcon from "./MovieIcon";
 
 export default function CustomNavbar() {
   return (
-    <Navbar className="backdrop-filter backdrop-blur-lg bg-opacity-30 p-4 border border-b-gray-700 rounded-b-lg">
+    <Navbar className="backdrop-filter backdrop-blur-lg bg-opacity-30 p-2 border border-b-gray-700 rounded-b-lg">
       <NavbarBrand>
         <MovieIcon className="w-6 mr-2" />
         <p className="font-bold text-xl text-white">Netpleks & Chill</p>
