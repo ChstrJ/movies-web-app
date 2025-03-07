@@ -16,13 +16,13 @@ type SearchResultProps = {
 
 const SearchResult = ({ results }: SearchResultProps) => {
   return (
-    <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[218px] flex-1">
+    <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[218px] h-[300px] flex-1">
       <CommandList asChild>
         <CommandGroup>
           {!results.length
             ? <CommandEmpty>No results found.</CommandEmpty>
             : results.map(result => (
-              <Link to={`/movies/{result.id}`} key={result.id} >
+              <Link to={`/movies/${result.id}`} key={result.id} >
                 <CommandItem className="cursor-pointer hover:text-slate-400 p-2">{result.title || result.name}
                   {result.name
                     ? <Badge variant={"outline"}>Series</Badge>
