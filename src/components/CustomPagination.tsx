@@ -5,10 +5,19 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
-import { usePaginationStore } from "@/stores/usePaginationStore"
+// import { useMovieStore } from "@/stores/useMovieStore";
+import { usePaginationStore } from "@/stores/usePaginationStore";
+// import { useShowStore } from "@/stores/useShowStore";
+// import { useLocation } from "react-router-dom";
 
 export function CustomPagination() {
   const { page, setPage } = usePaginationStore();
+  // const location = useLocation();
+
+  // const { moviePage, setMoviePage } = useMovieStore();
+  // const { showPage, setShowPage } = useShowStore();
+
+  // const { pathname } = location;
 
   return (
     <Pagination>

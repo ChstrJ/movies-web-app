@@ -25,3 +25,10 @@ export function getShowUrl(id: number, season: number, episode: number) {
   return `${basePath}/tv/tt${id}/${season}/${episode}`;
 }
 
+export const isMoviePage = (pathname: string) => {
+  return /^\/movie\/\d+$/.test(pathname);
+}
+
+export const isShowPage = (pathname: string) => {
+  return /^\/show\/\d+$/.test(pathname);
+}
