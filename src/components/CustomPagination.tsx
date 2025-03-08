@@ -14,7 +14,9 @@ export function CustomPagination() {
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
+          <PaginationPrevious
+            onClick={() => setPage(page - 5)}
+            className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
         </PaginationItem>
         <PaginationItem>
           <PaginationNext
