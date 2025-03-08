@@ -1,5 +1,5 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MovieIcon from "./MovieIcon";
 import { SearchIcon } from "lucide-react";
 import { Input } from "./ui/input";
@@ -13,7 +13,11 @@ import { debounce } from "lodash";
 
 
 export default function CustomNavbar() {
+  const location = useLocation();
+  const { pathname } = location;
+
   const { searchInput, userInput, setSearchInput, setUserInput } = useSearchStore();
+  const { setResultsDropdown } = useSearchStore();
 
   const { data: results, isLoading } = useQuery<Search[]>({
     queryKey: ['all', searchInput],
@@ -31,49 +35,69 @@ export default function CustomNavbar() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    searchDebounce(e.target.value);
-    setUserInput(e.target.value);
+    const value = e.target.value;
+    searchDebounce(value);
+    setUserInput(value);
   }
 
+  const isMoviePage = /^\/movie\/\d+$/.test(pathname);
+  const isShowPage = /^\/show\/\d+$/.test(pathname);
+
   return (
-    <Navbar className="backdrop-filter backdrop-blur-lg bg-opacity-30 p-2 border border-b-gray-700 rounded-b-lg">
+    <Navbar className={`
+      ${isMoviePage || isShowPage
+        ? `bg-gradient-to-b from-gray-900 to-gray-800`
+        : `backdrop-filter backdrop-blur-lg bg-opacity-30`}
+       p-2 border border-b-gray-500 rounded-b-sm`
+    }>
       <NavbarBrand>
         <MovieIcon className="w-6 mr-2" />
-        <p className="font-bold text-lg text-white">Netpleks & Chill</p>
+        <Link to={'/movies'} onClick={() => setResultsDropdown(false)}>
+          <p className="font-bold text-lg text-white cursor-pointer">Netpleks & Chill</p>
+        </Link>
       </NavbarBrand>
-      <NavbarContent className="gap-4" justify="center">
-        <NavbarItem className="hidden sm:flex">
-          <Link
-            to={"/movies"}
-            className="text-sm p-2 text-white hover:text-gray-400 duration-300 ease-in-out"
-          >
-            Movies
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hidden sm:flex">
-          <Link
-            to={"/shows"}
-            className="text-sm p-2 text-white rounded-md hover:text-gray-400 duration-200 ease-in-out"
-          >
-            Shows
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <div className="flex items-center justify-end rounded-lg w-full">
-            <SearchIcon color="white" size="18" className="absolute mr-3" />
-            <Input
-              className="w-full text-white bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
-              type="search"
-              placeholder="Search for anything..."
-              value={userInput}
-              onChange={handleChange}
-            />
-          </div>
-          {(searchInput.length > 0 && results?.length) &&
-            <SearchResult results={results} />
-          }
-        </NavbarItem>
-      </NavbarContent>
+      <div className="flex justify-end flex-1">
+        <NavbarContent className="gap-4">
+          <NavbarItem className="hidden sm:flex">
+            <Link
+              to={"/movies"}
+              className={
+                pathname === "/movies" ? `border-b-2 border-white text-white text-sm p-2 ` :
+                  `text-sm p-2 text-white hover:text-gray-400`
+              }
+            >
+              Movies
+            </Link>
+          </NavbarItem>
+          <NavbarItem className="hidden sm:flex">
+            <Link
+              to={"/shows"}
+              className={
+                pathname === "/shows" ? `border-b-2 border-white text-white text-sm p-2` :
+                  `text-sm p-2 text-white hover:text-gray-400`
+              }
+            >
+              Shows
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <div className="flex items-center justify-end rounded-lg w-full">
+              <SearchIcon color="white" size="18" className="absolute mr-3" />
+              <Input
+                className="w-full text-white bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
+                type="search"
+                placeholder="Search for anything..."
+                value={userInput}
+                onChange={handleChange}
+              />
+            </div>
+            {(searchInput.length > 0 && results?.length) &&
+              <SearchResult results={results} />
+            }
+          </NavbarItem>
+        </NavbarContent>
+
+      </div>
     </Navbar>
   );
 }

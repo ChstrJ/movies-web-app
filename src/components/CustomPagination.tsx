@@ -5,8 +5,11 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
+import { usePaginationStore } from "@/stores/usePaginationStore"
 
 export function CustomPagination() {
+  const { page, setPage } = usePaginationStore();
+
   return (
     <Pagination>
       <PaginationContent>
@@ -14,7 +17,9 @@ export function CustomPagination() {
           <PaginationPrevious className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
+          <PaginationNext
+            onClick={() => setPage(page + 5)}
+            className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

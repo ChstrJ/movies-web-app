@@ -3,6 +3,10 @@ import apiClient from "@/api";
 export const fetchPopularMovies = async (totalPages: number = 5) => {
   let request = [];
 
+  if (totalPages < 5) {
+    totalPages = 5;
+  }
+
   for (let page = 1; page <= totalPages; page++) {
     const response = apiClient.get(`/movie/popular?language=en-US&page=${page}`);
     request.push(response);
@@ -17,6 +21,9 @@ export const fetchPopularMovies = async (totalPages: number = 5) => {
 export const fetchPopularTvShows = async (totalPages: number = 5) => {
   let request = [];
 
+  if (totalPages < 5) {
+    totalPages = 5;
+  }
 
   for (let page = 1; page <= totalPages; page++) {
     request.push(apiClient.get(`/discover/tv?language=en-US&page=${page}`));

@@ -5,8 +5,9 @@ import { CustomPagination } from "@/components/CustomPagination";
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation();
-  console.log(location.pathname);
-  if (location.pathname === '/') {
+  const { pathname } = location;
+
+  if (pathname === '/') {
     return <Navigate to={'/movies'} />
   }
 
