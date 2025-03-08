@@ -11,14 +11,14 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation();
   const { pathname } = location;
 
-  if (pathname === '/') {
-    return <Navigate to={'/movies'} />
-  }
-
   useEffect(() => {
     setSearchInput('');
     setResultsDropdown(true);
   }, [pathname]);
+
+  if (pathname === '/') {
+    return <Navigate to={'/movies'} />
+  }
 
   return (
     <div className="min-h-screen flex flex-col antialiased bg-gradient-to-b from-gray-900 to-gray-800">
