@@ -26,7 +26,7 @@ export const fetchPopularTvShows = async (totalPages: number = 5) => {
   }
 
   for (let page = 1; page <= totalPages; page++) {
-    request.push(apiClient.get(`/discover/tv?language=en-US&page=${page}`));
+    request.push(apiClient.get(`/discover/tv?language=en-US&page=${page}&sort_by=vote_average.desc&vote_count.gte=200`));
   }
 
   const requests = await Promise.all(request);
@@ -68,4 +68,13 @@ export const searchMulti = async (keyword: string, page: number = 1) => {
   return response.data.results;
 }
 
+export const movieGenre = async () => {
+  const response = await apiClient.get(`genre/movie/list?language=en`);
+  return response.data.results;
+}
+
+export const showsDetails = async (id: number) => {
+  const response = await apiClient.get(`/tv/${id}`);
+  return response.data.results;
+}
 

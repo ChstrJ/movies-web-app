@@ -23,7 +23,7 @@ const ShowsList = () => {
       <div className="grid grid-cols-3 lg:grid-cols-6">
         {shows?.map((show) => (
           (show.poster_path && show.id) &&
-          <Link to={`/shows/${show.id}`} key={show.id}>
+          <Link to={`/show/${show.id}`} key={show.id}>
             <MovieCard img={show.poster_path} title={show.title} />
           </Link>
         ))}

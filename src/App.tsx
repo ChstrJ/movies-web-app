@@ -12,7 +12,7 @@ const App = () => {
         <Route path="/movies" element={<MovieList />} />
         <Route path="/shows" element={<ShowsList />} />
         <Route path="/movie/:id" element={<MoviePage />} />
-        <Route path="/shows/:id" element={<TvShowPage />} />
+        <Route path="/show/:id" element={<TvShowPage />} />
       </Routes>
     </MainLayout>
   )
