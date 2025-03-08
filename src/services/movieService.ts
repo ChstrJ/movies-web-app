@@ -32,7 +32,7 @@ export const fetchPopularTvShows = async (totalPages: number = 5) => {
   const requests = await Promise.all(request);
   const data = requests.flatMap((response) => response.data.results);
 
-  return data.slice(0, -2);
+  return data.slice(0, -3);
 }
 
 export const fetchSeriesById = async (id: number) => {
