@@ -10,6 +10,7 @@ import { searchMulti } from "@/services/movieService";
 import SearchResult from "./SearchResult";
 import { Search } from "@/lib/types";
 import { debounce } from "lodash";
+import EmptySearchResult from "./EmptySearchResult";
 
 
 export default function CustomNavbar() {
@@ -85,14 +86,15 @@ export default function CustomNavbar() {
               <SearchIcon color="white" size="18" className="absolute mr-3" />
               <Input
                 className="w-full text-white bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
-                type="search"
+                type="input"
                 placeholder="Search for anything..."
                 value={userInput}
                 onChange={handleChange}
               />
             </div>
-            {(searchInput.length > 0 && results?.length) &&
+            {(userInput.length > 0 && results?.length) ?
               <SearchResult results={results} />
+              : <EmptySearchResult />
             }
           </NavbarItem>
         </NavbarContent>

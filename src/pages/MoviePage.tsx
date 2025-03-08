@@ -1,9 +1,16 @@
 import { getMovieUrl } from "@/lib/utils";
+import { useSearchStore } from "@/stores/useSearchStore";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const MoviePage = () => {
+    const {setResultsDropdown} = useSearchStore();
     const { id } = useParams();
     const movieUrl = getMovieUrl(id);
+
+    useEffect(() => {
+        setResultsDropdown(false);
+    }, []);
 
     return (
         <div className="h-screen">

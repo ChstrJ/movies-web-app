@@ -10,8 +10,6 @@ import { usePaginationStore } from "@/stores/usePaginationStore"
 export function CustomPagination() {
   const { page, setPage } = usePaginationStore();
 
-  console.log(page)
-
   return (
     <Pagination>
       <PaginationContent>
