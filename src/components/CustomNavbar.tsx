@@ -54,7 +54,7 @@ export default function CustomNavbar() {
       <NavbarBrand>
         <MovieIcon className="w-6 mr-2" />
         <Link to={'/movies'} onClick={() => setResultsDropdown(false)}>
-          <p className="font-bold text-lg text-white cursor-pointer">Netpleks & Chill</p>
+          <p className="font-bold text-lg text-white cursor-pointer">BingeHub</p>
         </Link>
       </NavbarBrand>
       <div className="flex justify-end flex-1">
