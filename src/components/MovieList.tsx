@@ -18,7 +18,7 @@ const MovieList = () => {
     }
 
     return (
-        <div className="grid grid-cols-3 lg:grid-cols-6 mx-8">
+        <div className="grid grid-cols-3 lg:grid-cols-6">
             {movies?.map((movie) => (
                 (movie.poster_path && movie.id) &&
                 <Link to={`/movie/${movie.id}`} key={movie.id}>
