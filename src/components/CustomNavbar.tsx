@@ -85,7 +85,7 @@ export default function CustomNavbar() {
             <div className="flex items-center justify-end rounded-lg w-full">
               <SearchIcon color="white" size="18" className="absolute mr-3" />
               <Input
-                className="w-full text-white bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
+                className="w-full text-gray-300 bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
                 type="input"
                 placeholder="Search for anything..."
                 value={userInput}
@@ -98,7 +98,6 @@ export default function CustomNavbar() {
             }
           </NavbarItem>
         </NavbarContent>
-
       </div>
     </Navbar>
   );

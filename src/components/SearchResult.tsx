@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import {
   Command,
-  CommandGroup,
-  CommandEmpty,
   CommandItem,
   CommandList,
 } from "./ui/command";
 import { useSearchStore } from "@/stores/useSearchStore";
-import { cn, getImagePath } from "@/lib/utils";
+import { getImagePath } from "@/lib/utils";
 
 type SearchResultItem = {
   id?: number;
@@ -29,14 +27,9 @@ const SearchResult = ({ results }: SearchResultProps) => {
   return (
     <div>
       {resultsDropdown && results.length > 0 && (
-        <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[276px] md:w-[219px] h-[300px] flex-1">
+        <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[247px] md:w-[219px] h-[300px]">
           <CommandList asChild>
-            <CommandGroup>
-              {Array.isArray(results) && results.length === 0 ? (
-                <CommandEmpty className={cn("w-[400px] md:w-[219px]")}>
-                  No results found.
-                </CommandEmpty>
-              ) : (
+              {results.length > 0 && (
                 results.map((result) => (
                   <Link
                     onClick={() => setResultsDropdown(false)}
@@ -61,7 +54,6 @@ const SearchResult = ({ results }: SearchResultProps) => {
                   </Link>
                 ))
               )}
-            </CommandGroup>
           </CommandList>
         </Command>
       )}
