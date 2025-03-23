@@ -24,7 +24,7 @@ const SearchResult = ({ results }: SearchResultProps) => {
   return (
     <div>
       {resultsDropdown && results.length > 0 && (
-        <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[192px] md:w-[219px] h-[300px] flex-1">
+        <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[210px] md:w-[219px] h-[300px] flex-1">
           <CommandList asChild>
             <CommandGroup>
               {Array.isArray(results) && results.length === 0 ? (
@@ -33,10 +33,10 @@ const SearchResult = ({ results }: SearchResultProps) => {
                 results.map(result => (
                   <Link
                     onClick={() => setResultsDropdown(false)}
-                    to={result.id ? 
-                      (result.media_type === 'tv' ? `/show/${result.id}` : `/movie/${result.id}`) 
+                    to={result.id ?
+                      (result.media_type === 'tv' ? `/show/${result.id}` : `/movie/${result.id}`)
                       : '/'
-                    } 
+                    }
                     key={result.id}>
                     {result.poster_path && (
                       <CommandItem
