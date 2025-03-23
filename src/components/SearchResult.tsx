@@ -24,11 +24,13 @@ const SearchResult = ({ results }: SearchResultProps) => {
   return (
     <div>
       {resultsDropdown && results.length > 0 && (
-        <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[270px] md:w-[219px] h-[300px] flex-1">
+        <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[273px] md:w-[219px] h-[300px] flex-1">
           <CommandList asChild>
             <CommandGroup>
               {Array.isArray(results) && results.length === 0 ? (
-                <CommandEmpty>No results found.</CommandEmpty>
+                <CommandEmpty classname="w-[273px] md:w-[219px]">
+                  No results found.
+                </CommandEmpty>
               ) : (
                 results.map((result) => (
                   <Link
