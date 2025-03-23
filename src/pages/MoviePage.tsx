@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const MoviePage = () => {
-    const {setResultsDropdown} = useSearchStore();
+    const { setResultsDropdown } = useSearchStore();
     const { id } = useParams();
     const movieUrl = getMovieUrl(id);
 
@@ -19,10 +19,9 @@ const MoviePage = () => {
                 width="100%"
                 height="100%"
                 allowFullScreen
-            >
-            </iframe>
+            ></iframe>
         </div>
     );
-}
+};
 
 export default MoviePage;

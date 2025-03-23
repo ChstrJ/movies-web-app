@@ -18,19 +18,14 @@ const ShowsList = () => {
   }
 
   return (
-
-    <div className='flex flex-col'>
-      <div className="grid grid-cols-3 lg:grid-cols-6">
-        {shows?.map((show) => (
-          (show.poster_path && show.id) &&
-          <Link to={`/show/${show.id}`} key={show.id}>
-            <MovieCard img={show.poster_path} title={show.title} />
-          </Link>
-        ))}
-      </div>
-
+    <div className="grid grid-cols-3 lg:grid-cols-6">
+      {shows?.map((show) => (
+        (show.poster_path && show.id) &&
+        <Link to={`/show/${show.id}`} key={show.id}>
+          <MovieCard img={show.poster_path} title={show.title} />
+        </Link>
+      ))}
     </div>
-
   )
 
 }

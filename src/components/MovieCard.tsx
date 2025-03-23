@@ -2,9 +2,9 @@ import { getImagePath } from "@/lib/utils";
 import { Play } from "lucide-react";
 
 type MovieCardProps = {
-  img?: string,
-  title?: string
-}
+  img?: string;
+  title?: string;
+};
 
 const MovieCard = ({ img, title }: MovieCardProps) => {
   const src = getImagePath();
