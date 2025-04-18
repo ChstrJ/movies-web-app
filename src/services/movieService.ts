@@ -73,6 +73,11 @@ export const movieGenre = async () => {
   return response.data.results;
 }
 
+export const movieDetails = async (id: number) => {
+  const response = await apiClient.get(`/movie/${id}`);
+  return response.data.results;
+}
+
 export const showsDetails = async (id: number) => {
   const response = await apiClient.get(`/tv/${id}`);
   return response.data.results;

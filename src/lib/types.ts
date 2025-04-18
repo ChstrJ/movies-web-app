@@ -6,6 +6,10 @@ export type TMDB = {
   title?: string
 }
 
+export type MovieDetails = {
+
+}
+
 export type Search = {
   title: string
 }

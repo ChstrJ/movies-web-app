@@ -15,13 +15,11 @@ export function getVideoPath() {
 
 export function getMovieUrl(id: string | undefined) {
   const basePath = getVideoPath();
-  console.log(basePath);
   return `${basePath}/movie/${id}`;
 }
 
 export function getShowUrl(id: number, season: number, episode: number) {
   const basePath = getVideoPath();
-  console.log(`${basePath}/tv/${id}/${season}/${episode}`);
   return `${basePath}/tv/tt${id}/${season}/${episode}`;
 }
 

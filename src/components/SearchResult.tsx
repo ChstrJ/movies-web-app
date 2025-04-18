@@ -27,7 +27,7 @@ const SearchResult = ({ results }: SearchResultProps) => {
   return (
     <div>
       {resultsDropdown && results.length > 0 && (
-        <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[247px] md:w-[224px] h-[300px]">
+        <Command className="absolute border mt-1 border-slate-200 bg-gray-200 w-[193px] md:w-[217px] h-[300px]">
           <CommandList asChild>
               {results.length > 0 && (
                 results.map((result) => (
