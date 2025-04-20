@@ -32,9 +32,11 @@ export default function CustomNavbar() {
         }
        p-2 border border-b-gray-500 rounded-b-sm`}
     >
-      <NavbarBrand>
+      <NavbarBrand
+        className='cursor-pointer'
+        onClick={handleNavbarClick}>
         <MovieIcon className="w-6 mr-2" />
-        <p onClick={handleNavbarClick} className="font-bold text-lg text-white cursor-pointer">
+        <p className="font-bold text-lg text-white">
           BingeHub
         </p>
       </NavbarBrand>

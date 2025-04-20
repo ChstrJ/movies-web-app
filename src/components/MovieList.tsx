@@ -25,7 +25,7 @@ const MovieList = () => {
   return (
     <div className={cn(
       'grid grid-cols-3 lg:grid-cols-6 transition-all duration-300',
-      resultsDropdown && 'blur-md bg-black/40'
+      resultsDropdown && 'blur-md bg-black/40 pointer-events-none cursor-not-allowed'
     )}>
       {movies?.map(
         movie =>

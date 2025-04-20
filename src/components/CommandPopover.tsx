@@ -50,16 +50,17 @@ export default function CommandPopover({ open }: CommandPopoverProps) {
         <Popover open={open} onOpenChange={setResultsDropdown}>
             <PopoverContent
                 onInteractOutside={() => setResultsDropdown(false)}
-                className="mt-[6rem] w-screen h-[700px] fixed flex items-center justify-center border-none shadow-none">
+                className="mt-[6rem] h-[700px] text-[#242528] fixed flex justify-center items-center w-screen border-none shadow-none">
                 <Command
-                    className="max-w-2xl w-full mx-auto text-white border border-[#252528] bg-[#09090b]">
+                    className="w-full max-w-2xl border border-[#252528] bg-[#09090b] rounded-lg shadow-md">
                     <CommandInput
+                        className="text-white"
                         value={userInput}
                         onValueChange={handleChange}
                         placeholder="Search for anything..."
                     />
                     <CommandList
-                        className={cn('max-h-[700px]')}
+                        className={cn('max-h-[700px] text-white')}
                     >
                         {isFetching && (
                             <CommandEmpty className="text-center text-gray-500">
