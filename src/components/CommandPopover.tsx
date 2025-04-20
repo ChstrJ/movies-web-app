@@ -54,7 +54,7 @@ export default function CommandPopover({ open }: CommandPopoverProps) {
                 <Command
                     className="w-full max-w-2xl border border-[#252528] bg-[#09090b] rounded-lg shadow-md [&_[data-slot=command-input-wrapper]]:h-12">
                     <CommandInput
-                        className={cn('text-white', 'h-12')}
+                        className="h-12 w-full text-base text-white"
                         value={userInput}
                         onValueChange={handleChange}
                         placeholder="Search for anything..."
