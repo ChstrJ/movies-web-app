@@ -73,11 +73,9 @@ export default function CustomNavbar() {
               >
                 Search for anything...
               </Button>
-              {resultsDropdown && (
-                <CommandPopover
-                  open={resultsDropdown}
-                />
-              )}
+              <CommandPopover
+                open={resultsDropdown}
+              />
             </div>
           </NavbarItem>
         </NavbarContent>
