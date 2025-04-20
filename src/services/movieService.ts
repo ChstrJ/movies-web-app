@@ -35,9 +35,9 @@ export const fetchPopularTvShows = async (totalPages: number = 5) => {
   return data.slice(0, -3);
 }
 
-export const fetchSeriesById = async (id: number) => {
+export const findSeriesById = async (id: string | undefined) => {
   const response = await apiClient.get(`/tv/${id}`);
-  return response.data.results;
+  return response.data;
 }
 
 export const fetchTopRatedMovies = async (page: number = 1) => {
