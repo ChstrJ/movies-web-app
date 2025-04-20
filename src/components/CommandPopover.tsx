@@ -52,9 +52,9 @@ export default function CommandPopover({ open }: CommandPopoverProps) {
                 onInteractOutside={() => setResultsDropdown(false)}
                 className="mt-[6rem] h-[700px] text-[#242528] fixed flex justify-center items-center w-screen border-none shadow-none">
                 <Command
-                    className="w-full max-w-2xl border border-[#252528] bg-[#09090b] rounded-lg shadow-md">
+                    className="w-full max-w-2xl border border-[#252528] bg-[#09090b] rounded-lg shadow-md [&_[data-slot=command-input-wrapper]]:h-12">
                     <CommandInput
-                        className="text-white"
+                        className={cn('text-white', 'h-12')}
                         value={userInput}
                         onValueChange={handleChange}
                         placeholder="Search for anything..."
