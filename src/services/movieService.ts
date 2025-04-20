@@ -64,8 +64,14 @@ export const searchTvShows = async (keyword: string, page: number = 1) => {
 }
 
 export const searchMulti = async (keyword: string, page: number = 1) => {
-  const response = await apiClient.get(`/search/multi?query=${encodeURI(keyword)}&page=${page}`);
-  return response.data.results;
+  const response = await apiClient.get(`/search/multi?include_adult=false&query=${encodeURI(keyword)}&page=${page}`);
+  const results = response.data.results;
+
+  const sorted = results.sort((a: any, b: any) => {
+    return b.popularity - a.popularity;
+  });
+
+  return sorted;
 }
 
 export const movieGenre = async () => {
@@ -73,9 +79,9 @@ export const movieGenre = async () => {
   return response.data.results;
 }
 
-export const movieDetails = async (id: number) => {
-  const response = await apiClient.get(`/movie/${id}`);
-  return response.data.results;
+export const findMovieById = async (id: string | undefined) => {
+  const response = await apiClient.get(`movie/${id}?language=en-US`);
+  return response.data;
 }
 
 export const showsDetails = async (id: number) => {

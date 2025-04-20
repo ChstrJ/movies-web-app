@@ -33,7 +33,7 @@ const SearchResult = ({ results }: SearchResultProps) => {
                 <Link
                   onClick={() => {
                     setResultsDropdown(false);
-                    setDocumentTitle(result.title || result.name);
+                    setDocumentTitle((result.title || result.name) ?? '');
                   }}
                   to={
                     result.id

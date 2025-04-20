@@ -6,14 +6,13 @@ import { useEffect } from "react";
 import { useSearchStore } from "@/stores/useSearchStore";
 
 const MainLayout = ({ children }: MainLayoutProps) => {
-  const { setResultsDropdown, setSearchInput } = useSearchStore();
+  const { setSearchInput } = useSearchStore();
 
   const location = useLocation();
   const { pathname } = location;
 
   useEffect(() => {
     setSearchInput('');
-    setResultsDropdown(true);
   }, [pathname]);
 
   if (pathname === '/') {
