@@ -1,24 +1,40 @@
 import { getMovieUrl } from '@/lib/utils';
-import { useSearchStore } from '@/stores/useSearchStore';
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGeneralStore } from '@/stores/useGeneralStore.ts';
+import { useQuery } from '@tanstack/react-query';
+import { findMovieById } from '@/services/movieService';
 
 const MoviePage = () => {
-  const { setResultsDropdown } = useSearchStore();
-  const { documentTitle } = useGeneralStore();
   const { id } = useParams();
   const movieUrl = getMovieUrl(id);
 
-  useEffect(() => {
-    setResultsDropdown(false);
+  const { data: result, isLoading } = useQuery({
+    queryKey: ['movieDetail', id],
+    queryFn: () => findMovieById(id),
+    enabled: !!id,
+    refetchOnWindowFocus: false,
+  });
 
-    document.title = `BingeHub - ${documentTitle}`;
-  }, []);
+  if (isLoading) {
+    return <p className='text-white'>Loading...</p>
+  };
 
   return (
-    <div className="h-screen">
-      <iframe src={movieUrl} width="100%" height="100%" allowFullScreen></iframe>
+    <div className="h-screen p-2 overflow-hidden">
+      <div className='flex flex-col'>
+        {/* <div className='flex flex-row'>
+          <p>Server</p>
+        </div> */}
+        <div className='w-full h-[750px] relative overflow-auto'>
+          <iframe src={movieUrl} width="100%" height="100%" allowFullScreen></iframe>
+        </div>
+        {result && (
+          <div className='pt-2'>
+            <h1 className='text-2xl font-bold text-white'>{result?.title || result?.name}
+            </h1>
+            <p className='text-gray-400'>{result?.overview}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

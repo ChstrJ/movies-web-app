@@ -2,44 +2,16 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import MovieIcon from './MovieIcon';
 import { SearchIcon } from 'lucide-react';
-import { Input } from './ui/input';
 import { useSearchStore } from '@/stores/useSearchStore';
-import React, { useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { searchMulti } from '@/services/movieService';
-import SearchResult from './SearchResult';
-import { Search } from '@/lib/types';
-import { debounce } from 'lodash';
-import EmptySearchResult from './EmptySearchResult';
+import CommandPopover from './CommandPopover';
+import { Button } from './ui/button';
 
 export default function CustomNavbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { pathname } = location;
 
-  const { searchInput, userInput, setSearchInput, setUserInput, setResultsDropdown } =
-    useSearchStore();
-
-  const { data: results, isLoading } = useQuery<Search[]>({
-    queryKey: ['all', searchInput],
-    queryFn: () => searchMulti(searchInput),
-  });
-
-  if (isLoading) {
-    <p>Loading...</p>;
-  }
-
-  const searchDebounce = useCallback(
-    debounce(value => setSearchInput(value), 1000),
-    []
-  );
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const value = e.target.value;
-    searchDebounce(value);
-    setUserInput(value);
-  };
+  const { setResultsDropdown, resultsDropdown } = useSearchStore();
 
   const handleNavbarClick = () => {
     setResultsDropdown(false);
@@ -50,14 +22,14 @@ export default function CustomNavbar() {
   const isMoviePage = /^\/movie\/\d+$/.test(pathname);
   const isShowPage = /^\/show\/\d+$/.test(pathname);
 
+
   return (
     <Navbar
       className={`
-      ${
-        isMoviePage || isShowPage
+      ${isMoviePage || isShowPage
           ? `bg-gradient-to-b from-gray-900 to-gray-800`
           : `backdrop-filter backdrop-blur-lg bg-opacity-30`
-      }
+        }
        p-2 border border-b-gray-500 rounded-b-sm`}
     >
       <NavbarBrand>
@@ -95,19 +67,18 @@ export default function CustomNavbar() {
           <NavbarItem>
             <div className="flex items-center justify-end rounded-lg w-full">
               <SearchIcon color="white" size="18" className="absolute mr-3" />
-              <Input
-                className="w-full text-gray-300 bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300"
-                type="input"
-                placeholder="Search for anything..."
-                value={userInput}
-                onChange={handleChange}
-              />
+              <Button
+                onClick={() => setResultsDropdown(true)}
+                className="w-full text-gray-300 bg-gray-500 focus:outline-none focus:ring-1 ring-slate-300 cursor-pointer pr-10"
+              >
+                Search for anything...
+              </Button>
+              {resultsDropdown && (
+                <CommandPopover
+                  open={resultsDropdown}
+                />
+              )}
             </div>
-            {userInput.length > 0 && results?.length ? (
-              <SearchResult results={results} />
-            ) : (
-              <EmptySearchResult />
-            )}
           </NavbarItem>
         </NavbarContent>
       </div>

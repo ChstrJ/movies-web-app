@@ -14,7 +14,7 @@ export const useSearchStore = create<searchState>((set) => ({
   userInput: "",
   setSearchInput: (input) => set({ searchInput: input }),
   setUserInput: (input) => set({ userInput: input }),
-  resultsDropdown: true,
+  resultsDropdown: false,
   setResultsDropdown: (value) => set({ resultsDropdown: value, userInput: "" }),
 }));
 
