@@ -5,9 +5,12 @@ import { Link } from 'react-router-dom';
 import { usePaginationStore } from '@/stores/usePaginationStore';
 import { useGeneralStore } from '@/stores/useGeneralStore.ts';
 import { SearchResult } from '@/lib/types';
+import { useSearchStore } from '@/stores/useSearchStore';
+import { cn } from '@/lib/utils';
 
 const MovieList = () => {
   const { page } = usePaginationStore();
+  const { resultsDropdown } = useSearchStore();
   const { setDocumentTitle, setSelectedResult } = useGeneralStore();
 
   const { data: movies, isLoading } = useQuery<SearchResult[]>({
@@ -20,7 +23,10 @@ const MovieList = () => {
   }
 
   return (
-    <div className="grid grid-cols-3 lg:grid-cols-6">
+    <div className={cn(
+      'grid grid-cols-3 lg:grid-cols-6 transition-all duration-300',
+      resultsDropdown && 'blur-md bg-black/40'
+    )}>
       {movies?.map(
         movie =>
           movie.poster_path &&

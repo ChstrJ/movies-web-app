@@ -48,8 +48,11 @@ export default function CommandPopover({ open }: CommandPopoverProps) {
 
     return (
         <Popover open={open} onOpenChange={setResultsDropdown}>
-            <PopoverContent className="mt-[6rem] w-screen h-[700px] fixed flex items-center justify-center border-none shadow-none">
-                <Command className="max-w-2xl w-full mx-auto text-white border border-[#252528] bg-[#09090b]">
+            <PopoverContent
+                onInteractOutside={() => setResultsDropdown(false)}
+                className="mt-[6rem] w-screen h-[700px] fixed flex items-center justify-center border-none shadow-none">
+                <Command
+                    className="max-w-2xl w-full mx-auto text-white border border-[#252528] bg-[#09090b]">
                     <CommandInput
                         value={userInput}
                         onValueChange={handleChange}
