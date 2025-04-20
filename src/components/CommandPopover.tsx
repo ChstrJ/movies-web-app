@@ -84,11 +84,13 @@ export default function CommandPopover({ open }: CommandPopoverProps) {
                                                 alt={result.title || result.name}
                                             />
                                             <p className="inline-block">{result.title || result.name}</p>
-                                            <span className="text-slate-400 rounded-md ml-2 bg-slate-900 p-1">
-                                                {result.media_type === 'movie' ? result?.release_date.split('-')[0] : result?.first_air_date.split('-')[0]}
-                                                {" - "}
-                                                {result.media_type === 'movie' ? 'Movie' : 'TV Show'}
-                                            </span>
+                                            {result.release_date && result.first_air_date && (
+                                                <span className="text-slate-400 rounded-md ml-2 bg-slate-900 p-1">
+                                                    {result.media_type === 'movie' ? result.release_date.split('-')[0] : result.first_air_date.split('-')[0]}
+                                                    {" - "}
+                                                    {result.media_type === 'movie' ? 'Movie' : 'TV Show'}
+                                                </span>
+                                            )}
                                         </div>
                                         <div>
                                             <p className="text-sm text-slate-400 mt-1">{result.overview}</p>
