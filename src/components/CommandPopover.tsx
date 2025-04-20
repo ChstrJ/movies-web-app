@@ -78,7 +78,7 @@ export default function CommandPopover({ open }: CommandPopoverProps) {
                                 <CommandItem
                                     key={result.id}
                                     value={result.title || result.name}
-                                    className="cursor-pointer hover:text-slate-400 p-2 items-center hover:bg-[#252528]"
+                                    className="cursor-pointer hover:text-slate-400 p-2 items-center hover:bg-[#252528] border-b border-[#252528]"
                                     onSelect={() => handleSelect(result)}
                                 >
                                     <div className="flex flex-col w-full">
