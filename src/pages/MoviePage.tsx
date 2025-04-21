@@ -2,6 +2,7 @@ import { getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { findMovieById } from '@/services/movieService';
+import CustomTab from '@/components/CustomTab';
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -21,12 +22,10 @@ const MoviePage = () => {
   return (
     <div className="h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>
-        {/* <div className='flex flex-row'>
-          <p>Server</p>
-        </div> */}
         <div className='w-full h-[750px] relative overflow-auto'>
           <iframe src={movieUrl} width="100%" height="100%" allowFullScreen></iframe>
         </div>
+        <CustomTab />
         {result && (
           <div className='pt-2'>
             <h1 className='text-2xl font-bold text-white'>{result?.title || result?.name}
