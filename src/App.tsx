@@ -7,14 +7,15 @@ import TvShowPage from "./pages/TvShowPage"
 
 const App = () => {
   return (
-    <MainLayout>
-      <Routes>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<MovieList />} />
         <Route path="/movies" element={<MovieList />} />
         <Route path="/shows" element={<ShowsList />} />
         <Route path="/movie/:id" element={<MoviePage />} />
         <Route path="/show/:id" element={<TvShowPage />} />
-      </Routes>
-    </MainLayout>
+      </Route>
+    </Routes>
   )
 }
 

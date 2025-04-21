@@ -18,8 +18,6 @@ const MoviePage = () => {
     refetchOnWindowFocus: false,
   });
 
-  console.log(selectedServer);
-
   const servers = [
     {
       serverName: 'Server1',

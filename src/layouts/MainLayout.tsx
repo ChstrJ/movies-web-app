@@ -1,19 +1,10 @@
-import { MainLayoutProps } from "@/lib/types";
 import CustomNavbar from "@/components/CustomNavbar";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { CustomPagination } from "@/components/CustomPagination";
-import { useEffect } from "react";
-import { useSearchStore } from "@/stores/useSearchStore";
 
-const MainLayout = ({ children }: MainLayoutProps) => {
-  const { setSearchInput } = useSearchStore();
-
+const MainLayout = () => {
   const location = useLocation();
   const { pathname } = location;
-
-  useEffect(() => {
-    setSearchInput('');
-  }, [pathname]);
 
   if (pathname === '/') {
     return <Navigate to={'/movies'} />
@@ -25,7 +16,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         <CustomNavbar />
       </div>
       <main className="flex-1">
-        {children}
+        <Outlet />
       </main>
 
       {['/movies', '/shows'].includes(location.pathname) &&
