@@ -1,4 +1,4 @@
-import { SearchResult, Server } from '@/lib/types';
+import { SearchResult } from '@/lib/types';
 import { create } from 'zustand';
 
 type generalStore = {

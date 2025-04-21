@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { findMovieById } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
-import { useEffect } from 'react';
 
 const MoviePage = () => {
   const { id } = useParams();
