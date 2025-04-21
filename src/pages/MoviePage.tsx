@@ -27,7 +27,7 @@ const MoviePage = () => {
     },
     {
       serverName: 'Server2',
-      serverUrl: movieUrl
+      serverUrl: 'movie/123'
     }
 
   ]
@@ -42,7 +42,9 @@ const MoviePage = () => {
         <div className='w-full h-[750px] relative overflow-auto'>
           <iframe src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
         </div>
-        <CustomTab data={servers} />
+        <div className='pt-2'>
+          <CustomTab data={servers} />
+        </div>
         {result && (
           <div className='pt-2'>
             <h1 className='text-2xl font-bold text-white'>{result?.title || result?.name}
