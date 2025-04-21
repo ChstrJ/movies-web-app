@@ -3,10 +3,14 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { findMovieById } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
+import { useGeneralStore } from '@/stores/useGeneralStore';
+import { useEffect } from 'react';
 
 const MoviePage = () => {
   const { id } = useParams();
   const movieUrl = getMovieUrl(id);
+
+  const { selectedServer } = useGeneralStore();
 
   const { data: result, isLoading } = useQuery({
     queryKey: ['movieDetail', id],
@@ -14,6 +18,20 @@ const MoviePage = () => {
     enabled: !!id,
     refetchOnWindowFocus: false,
   });
+
+  console.log(selectedServer);
+
+  const servers = [
+    {
+      serverName: 'Server1',
+      serverUrl: movieUrl
+    },
+    {
+      serverName: 'Server2',
+      serverUrl: movieUrl
+    }
+
+  ]
 
   if (isLoading) {
     return <p className='text-white'>Loading...</p>
@@ -23,9 +41,9 @@ const MoviePage = () => {
     <div className="h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>
         <div className='w-full h-[750px] relative overflow-auto'>
-          <iframe src={movieUrl} width="100%" height="100%" allowFullScreen></iframe>
+          <iframe src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
         </div>
-        <CustomTab />
+        <CustomTab data={servers} />
         {result && (
           <div className='pt-2'>
             <h1 className='text-2xl font-bold text-white'>{result?.title || result?.name}

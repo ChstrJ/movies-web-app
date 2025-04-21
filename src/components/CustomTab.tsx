@@ -1,38 +1,36 @@
-import { Tabs, Tab, Card, CardBody } from "@heroui/react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useGeneralStore } from "@/stores/useGeneralStore"
 
-export default function CustomTab() {
+type Server = {
+  serverUrl: string;
+  serverName: string;
+}
+
+type CustomTabProps = {
+  data: Server[]
+}
+
+export default function CustomTab({ data }: CustomTabProps) {
+  const { setSelectedServer, selectedServer } = useGeneralStore();
+
+  const handleClick = (server: string) => {
+    setSelectedServer(server)
+  }
+
   return (
-    <div className="border border-red-500 text-white">
-      <Tabs aria-label="Options">
-        <Tab
-          key="photos" title="Photos">
-          <Card>
-            <CardBody>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </CardBody>
-          </Card>
-        </Tab>
-        <Tab key="music" title="Music">
-          <Card>
-            <CardBody>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-              ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur.
-            </CardBody>
-          </Card>
-        </Tab>
-        <Tab key="videos" title="Videos">
-          <Card>
-            <CardBody>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
-            </CardBody>
-          </Card>
-        </Tab>
-      </Tabs>
-    </div>
+    <Tabs defaultValue="" className="w-full">
+      <TabsList
+        className="gap-2"
+      >
+        {data?.map((item, index) => (
+          <TabsTrigger
+            className={`border p-2 border-gray-400 text-white hover:bg-slate-700 cursor-pointer ${selectedServer === item.serverUrl && 'bg-black'}`}
+            onClick={() => handleClick(item.serverUrl)}
+            key={index} value={item.serverUrl}>{item.serverName}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+    </Tabs>
   )
 }
 

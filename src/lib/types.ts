@@ -31,3 +31,9 @@ export type SearchResult = {
   overview?: string;
 };
 
+export type Server = {
+  serverUrl: string;
+  serverName: string;
+}
+
+
