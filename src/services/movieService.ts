@@ -1,6 +1,14 @@
 import apiClient from "@/api";
 import { TMDBVideo } from "@/lib/types";
 
+export const fetchMovieImdbId = async (id: string | undefined) => {
+  const response = await apiClient.get(`movie/${id}/external_ids`);
+
+  const data = response.data;
+
+  return data?.imdb_id ?? null;
+}
+
 export const fetchPopularMovies = async (totalPages: number = 5) => {
   let request = [];
 
@@ -77,7 +85,7 @@ export const getVideoTrailer = async (id: string | undefined) => {
 }
 
 export const searchMulti = async (keyword: string, page: number = 1) => {
-  const response = await apiClient.get(`/search/multi?include_adult=false&query=${encodeURI(keyword)}& page=${page}`);
+  const response = await apiClient.get(`/search/multi?include_adult=false&query=${encodeURI(keyword)}&page=${page}`);
   const results = response.data.results;
 
   const sorted = results.sort((a: any, b: any) => {

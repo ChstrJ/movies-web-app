@@ -1,7 +1,7 @@
-import { get2embedUrl, getBackdropImage, getImagePath, getMovieUrl } from '@/lib/utils';
+import { get2embedUrl, getBackdropImage, getGoDriveUrl, getImagePath, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { findMovieById, getVideoTrailer } from '@/services/movieService';
+import { fetchMovieImdbId, findMovieById, getVideoTrailer } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { Play } from "lucide-react";
@@ -35,6 +35,15 @@ const MoviePage = () => {
     refetchOnWindowFocus: false
   });
 
+  const { data: imdb } = useQuery({
+    queryKey: ['imdb', id],
+    queryFn: () => fetchMovieImdbId(id),
+    enabled: !!id,
+    refetchOnWindowFocus: false
+  });
+
+  const goDriveUrl = getGoDriveUrl(imdb);
+
   const backdropImage = result ? getBackdropImage(result.backdrop_path) : null;
 
   const servers = [
@@ -50,6 +59,10 @@ const MoviePage = () => {
     {
       serverName: 'Server 2',
       serverUrl: twoEmbedUrl,
+    },
+    {
+      serverName: 'Server 3',
+      serverUrl: goDriveUrl,
     }
   ]
 

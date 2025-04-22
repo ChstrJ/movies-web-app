@@ -25,6 +25,11 @@ export function getMultiEmbedUrl(id: string | undefined) {
   return `https://multiembed.to/tmdb/movie/${id}`;
 }
 
+export function getGoDriveUrl(id: string | undefined) {
+  return `https://godriveplayer.com/player.php?imdb=${id}`;
+}
+
+
 export function getVembedUrl(id: string | undefined) {
   return `https://vembed.net/movie/${id}`;
 }
