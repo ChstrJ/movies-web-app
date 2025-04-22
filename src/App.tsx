@@ -4,6 +4,7 @@ import MoviePage from "./pages/MoviePage"
 import MainLayout from "./layouts/MainLayout"
 import ShowsList from "./components/ShowsList"
 import TvShowPage from "./pages/TvShowPage"
+import './index.css';
 
 const App = () => {
   return (

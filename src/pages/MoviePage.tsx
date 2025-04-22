@@ -1,19 +1,16 @@
 import { get2embedUrl, getBackdropImage, getGoDriveUrl, getImagePath, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { fetchMovieImdbId, findMovieById, getVideoTrailer } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { Play } from "lucide-react";
 import { useEffect } from 'react';
 import Loader from '@/components/Loader';
+import { useMovieDetails } from '@/hooks/useMovieDetails';
+import { useTrailer } from '@/hooks/useTrailer';
+import CustomChip from '@/components/CustomBadge';
 
 const MoviePage = () => {
   const { id } = useParams();
-  const movieUrl = getMovieUrl(id);
-  const twoEmbedUrl = get2embedUrl(id);
-
-  const src = getImagePath();
 
   const { selectedServer, setSelectedServer, showBackdropImage, setShowBackdropImage } = useGeneralStore();
 
@@ -21,31 +18,16 @@ const MoviePage = () => {
     setSelectedServer(movieUrl)
   }, []);
 
-  const { data: result, isLoading } = useQuery({
-    queryKey: ['movieDetail', id],
-    queryFn: () => findMovieById(id),
-    enabled: !!id,
-    refetchOnWindowFocus: false,
-  });
+  const { data: movie, isLoading } = useMovieDetails(id);
+  const { data: trailer } = useTrailer(id);
 
-  const { data: trailer } = useQuery({
-    queryKey: ['trailer', id],
-    queryFn: () => getVideoTrailer(id),
-    enabled: !!id,
-    refetchOnWindowFocus: false
-  });
+  const goDriveUrl = getGoDriveUrl(movie?.imdb_id);
+  const movieUrl = getMovieUrl(id);
+  const twoEmbedUrl = get2embedUrl(id);
+  const src = getImagePath();
+  const backdropImage = movie ? getBackdropImage(movie.backdrop_path) : null;
 
-  const { data: imdb } = useQuery({
-    queryKey: ['imdb', id],
-    queryFn: () => fetchMovieImdbId(id),
-    enabled: !!id,
-    refetchOnWindowFocus: false
-  });
-
-  const goDriveUrl = getGoDriveUrl(imdb);
-
-  const backdropImage = result ? getBackdropImage(result.backdrop_path) : null;
-
+  console.log(movie)
   const servers = [
     {
       serverName: 'Trailer',
@@ -92,18 +74,23 @@ const MoviePage = () => {
         <div className='pt-2'>
           <CustomTab data={servers} />
         </div>
-        {result && (
+        {movie && (
           <div className='flex flex-col p-2'>
             <div className='flex flex-row'>
               <img
-                src={`${src}/w154/${result.poster_path}`}
-                alt={result.title || result.name}
+                src={`${src}/w154/${movie.poster_path}`}
+                alt={movie.title || movie.name}
               />
-              <div className='ml-4 flex flex-col'>
-                <h1 className='text-2xl font-bold text-white'>{result?.title || result?.name}
-                </h1>
-                <p className='text-gray-400 mt-2'>{result?.overview}</p>
-
+              <div className='ml-4 flex flex-col text-white'>
+                <h1 className='text-2xl font-bold text-white'>{movie?.title || movie?.name}</h1>
+                <p className='text-white text-xs mb-2 mt-2'>
+                  Rating: <CustomChip data={`${parseInt(movie?.vote_average)} / 10`
+                  } />
+                </p>
+                <p className='text-xs'>
+                  Genres: <CustomChip data={movie.genres} />
+                </p>
+                <p className='text-gray-400 mt-2'>{movie?.overview}</p>
               </div>
             </div>
           </div>

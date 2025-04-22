@@ -17,7 +17,7 @@ export const fetchPopularMovies = async (totalPages: number = 5) => {
   }
 
   for (let page = 1; page <= totalPages; page++) {
-    const response = apiClient.get(`/movie/popular?language=en-US&page=${page}`);
+    const response = apiClient.get(`/movie/popular?language=en-US&page=${page}&region=US`);
     request.push(response);
   }
 
