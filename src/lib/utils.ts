@@ -17,6 +17,10 @@ export function getTMDBPath() {
   return import.meta.env.VITE_TMDB_BASE_URL;
 }
 
+export function get2embedUrl(id: string | undefined) {
+  return `https://www.2embed.to/embed/tmdb/movie/${id}`;
+}
+
 export function getMovieUrl(id: string | undefined) {
   const basePath = getVideoPath();
   return `${basePath}/movie/${id}`;

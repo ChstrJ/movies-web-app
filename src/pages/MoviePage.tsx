@@ -1,4 +1,4 @@
-import { getBackdropImage, getImagePath, getMovieUrl } from '@/lib/utils';
+import { get2embedUrl, getBackdropImage, getImagePath, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { findMovieById, getVideoTrailer } from '@/services/movieService';
@@ -11,6 +11,7 @@ import Loader from '@/components/Loader';
 const MoviePage = () => {
   const { id } = useParams();
   const movieUrl = getMovieUrl(id);
+  const twoEmbedUrl = get2embedUrl(id);
   const src = getImagePath();
 
   const { selectedServer, setSelectedServer, showBackdropImage, setShowBackdropImage } = useGeneralStore();
@@ -44,6 +45,11 @@ const MoviePage = () => {
       serverName: 'Server 1',
       serverUrl: movieUrl,
       default: true
+    },
+    {
+      serverName: 'Server 2',
+      serverUrl: twoEmbedUrl,
+
     }
   ]
 
