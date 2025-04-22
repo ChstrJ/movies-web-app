@@ -5,6 +5,7 @@ import { findMovieById } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { useState } from 'react';
+import { Play } from "lucide-react";
 
 const MoviePage = () => {
   const [showBackdrop, setShowBackdrop] = useState(true);
@@ -48,10 +49,19 @@ const MoviePage = () => {
       <div className='flex flex-col'>
         <div className='w-full h-[750px] relative overflow-auto'>
           {showBackdrop && backdropImage ? (
-            <img
-              className='cursor-pointer'
+            <div
+              className='relative w-full h-full group cursor-pointer'
               onClick={() => setShowBackdrop(false)}
-              src={backdropImage} alt='Test' />
+            >
+              <img
+                className='w-full h-full object-cover'
+                src={backdropImage}
+                alt='Backdrop'
+              />
+              <div className='absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300'>
+                <Play className='text-white text-6xl' />
+              </div>
+            </div>
           ) : (
             <iframe src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
           )}
