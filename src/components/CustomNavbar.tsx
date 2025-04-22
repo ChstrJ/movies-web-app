@@ -39,7 +39,7 @@ export default function CustomNavbar() {
        p-2 border border-b-gray-500 rounded-b-sm`}
     >
       <Menu
-        className='text-white cursor-pointer'
+        className='text-white cursor-pointer sm:hidden'
         onClick={() => setShowDrawer(true)}
       />
 
