@@ -7,7 +7,7 @@ type generalStore = {
   selectedResult: SearchResult | null;
   setSelectedResult: (result: SearchResult) => void;
   selectedServer: string | null;
-  setSelectedServer: (server: string) => void;
+  setSelectedServer: (server: string | null) => void;
   showBackdropImage: boolean;
   setShowBackdropImage: (show: boolean) => void;
 };

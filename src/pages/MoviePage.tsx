@@ -23,7 +23,7 @@ const MoviePage = () => {
     queryKey: ['trailer', id],
     queryFn: () => getVideoTrailer(id),
     enabled: !!id,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: false
   });
 
   const backdropImage = result ? getBackdropImage(result.backdrop_path) : null;
@@ -43,8 +43,6 @@ const MoviePage = () => {
     }
 
   ]
-
-  console.log(selectedServer);
 
   if (isLoading) {
     return <p className='text-white'>Loading...</p>

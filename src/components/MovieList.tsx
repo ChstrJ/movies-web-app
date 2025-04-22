@@ -7,16 +7,22 @@ import { useGeneralStore } from '@/stores/useGeneralStore.ts';
 import { SearchResult } from '@/lib/types';
 import { useSearchStore } from '@/stores/useSearchStore';
 import { cn } from '@/lib/utils';
+import { useEffect } from 'react';
 
 const MovieList = () => {
   const { page } = usePaginationStore();
   const { resultsDropdown } = useSearchStore();
-  const { setDocumentTitle, setSelectedResult } = useGeneralStore();
+  const { setDocumentTitle, setSelectedResult, setShowBackdropImage, setSelectedServer } = useGeneralStore();
 
   const { data: movies, isLoading } = useQuery<SearchResult[]>({
     queryKey: ['movies', page],
     queryFn: () => fetchPopularMovies(page),
   });
+
+  useEffect(() => {
+    setShowBackdropImage(true);
+    setSelectedServer(null);
+  }, []);
 
   if (isLoading) {
     return <p>Loading...</p>;
