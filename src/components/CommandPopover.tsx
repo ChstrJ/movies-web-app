@@ -94,9 +94,6 @@ export default function CommandPopover({ open }: CommandPopoverProps) {
                                                 {result.media_type === 'movie' ? 'Movie' : 'TV Show'}
                                             </span>
                                         </div>
-                                        <div>
-                                            <p className="text-sm text-slate-400 mt-1">{result.overview}</p>
-                                        </div>
                                     </div>
                                 </CommandItem>
                             )
