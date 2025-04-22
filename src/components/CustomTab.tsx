@@ -20,7 +20,7 @@ export default function CustomTab({ data }: CustomTabProps) {
   }
 
   return (
-    <Tabs defaultValue='' value='' className="w-full">
+    <Tabs value='' className="w-full">
       <TabsList className="gap-2 flex justify-start">
         {data?.map((item, index) => (
           <TabsTrigger
