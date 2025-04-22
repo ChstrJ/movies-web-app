@@ -8,6 +8,7 @@ import { SearchResult } from '@/lib/types';
 import { useSearchStore } from '@/stores/useSearchStore';
 import { cn } from '@/lib/utils';
 import Loader from './Loader';
+import { useEffect } from 'react';
 
 const MovieList = () => {
   const { page } = usePaginationStore();
