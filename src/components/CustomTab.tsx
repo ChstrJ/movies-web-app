@@ -1,4 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { cn } from "@/lib/utils";
 import { useGeneralStore } from "@/stores/useGeneralStore"
 
 type Server = {
@@ -19,15 +20,21 @@ export default function CustomTab({ data }: CustomTabProps) {
   }
 
   return (
-    <Tabs defaultValue="" className="w-full">
-      <TabsList
-        className="gap-2"
-      >
+    <Tabs defaultValue='' value='' className="w-full">
+      <TabsList className="gap-2 flex justify-start">
         {data?.map((item, index) => (
           <TabsTrigger
-            className={`border p-2 border-gray-400 text-white hover:bg-slate-700 cursor-pointer ${selectedServer === item.serverUrl && 'bg-black'}`}
+            key={index}
+            value={item.serverUrl}
             onClick={() => handleClick(item.serverUrl)}
-            key={index} value={item.serverUrl}>{item.serverName}
+            className={cn(
+              "border border-gray-500 text-white px-4 py-2 rounded-lg",
+              "transition-all duration-300 ease-in-out",
+              "hover:bg-slate-700 hover:scale-105",
+              `${selectedServer === item.serverUrl && 'bg-slate-700'}`
+            )}
+          >
+            {item.serverName}
           </TabsTrigger>
         ))}
       </TabsList>
