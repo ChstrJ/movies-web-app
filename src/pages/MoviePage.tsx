@@ -1,4 +1,4 @@
-import { getMovieUrl } from '@/lib/utils';
+import { getBackdropImage, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { findMovieById } from '@/services/movieService';
@@ -20,15 +20,20 @@ const MoviePage = () => {
 
   const servers = [
     {
-      serverName: 'Server1',
+      serverName: 'Server 1',
       serverUrl: movieUrl
     },
     {
-      serverName: 'Server2',
+      serverName: 'Server 2',
       serverUrl: 'movie/123'
     }
 
   ]
+
+  let backdropImage = null;
+  if (result) {
+    backdropImage = getBackdropImage(result.backdrop_path);
+  }
 
   if (isLoading) {
     return <p className='text-white'>Loading...</p>
@@ -38,6 +43,9 @@ const MoviePage = () => {
     <div className="h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>
         <div className='w-full h-[750px] relative overflow-auto'>
+          {backdropImage && (
+            <img src={backdropImage} />
+          )}
           <iframe src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
         </div>
         <div className='pt-2'>
