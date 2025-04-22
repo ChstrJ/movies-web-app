@@ -50,6 +50,7 @@ const MoviePage = () => {
         <div className='w-full h-[750px] relative overflow-auto'>
           {showBackdrop && backdropImage ? (
             <img
+              className='cursor-pointer'
               onClick={() => setShowBackdrop(false)}
               src={backdropImage} alt='Test' />
           ) : (
