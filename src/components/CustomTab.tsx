@@ -1,16 +1,16 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { cn } from "@/lib/utils";
-import { useGeneralStore } from "@/stores/useGeneralStore"
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
+import { useGeneralStore } from '@/stores/useGeneralStore';
 
 type Server = {
   serverUrl: string;
   serverName: string;
   default?: boolean;
-}
+};
 
 type CustomTabProps = {
-  data: Server[]
-}
+  data: Server[];
+};
 
 export default function CustomTab({ data }: CustomTabProps) {
   const { setSelectedServer, selectedServer, setShowBackdropImage } = useGeneralStore();
@@ -18,7 +18,7 @@ export default function CustomTab({ data }: CustomTabProps) {
   const handleClick = (server: string) => {
     setSelectedServer(server);
     setShowBackdropImage(false);
-  }
+  };
 
   return (
     <Tabs value={selectedServer ?? ''}>
@@ -28,18 +28,17 @@ export default function CustomTab({ data }: CustomTabProps) {
             key={index}
             value={item.serverUrl}
             onClick={() => handleClick(item.serverUrl)}
-            className={cn
-              "border border-gray-500 text-white px-4 py-2 rounded-lg cursor-pointer",
-          "transition-all duration-300 ease-in-out",
-          "hover:bg-slate-700 hover:scale-105",
-          "data-[state=active]:bg-slate-700 data-[state=active]:text-white"
-        )}
+            className={cn(
+              'border border-gray-500 text-white px-4 py-2 rounded-lg',
+              'transition-all duration-300 ease-in-out cursor-pointer',
+              'hover:bg-slate-700 hover:scale-105',
+              'data-[state=active]:bg-slate-700 data-[state=active]:text-white'
+            )}
           >
-        {item.serverName}
-      </TabsTrigger>
+            {item.serverName}
+          </TabsTrigger>
         ))}
-    </TabsList>
-    </Tabs >
-  )
+      </TabsList>
+    </Tabs>
+  );
 }
-
