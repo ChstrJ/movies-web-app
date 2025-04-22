@@ -44,12 +44,7 @@ const MoviePage = () => {
       serverName: 'Server 1',
       serverUrl: movieUrl,
       default: true
-    },
-    {
-      serverName: 'Server 2',
-      serverUrl: 'movie/123'
     }
-
   ]
 
   return (

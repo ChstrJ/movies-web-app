@@ -21,7 +21,7 @@ export default function CustomTab({ data }: CustomTabProps) {
   }
 
   return (
-    <Tabs value={selectedServer ?? ''} className="w-full">
+    <Tabs value={selectedServer ?? ''}>
       <TabsList className="gap-2 flex justify-start">
         {data?.map((item, index) => (
           <TabsTrigger
