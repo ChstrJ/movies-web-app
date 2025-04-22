@@ -1,7 +1,7 @@
 import { getBackdropImage, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { findMovieById } from '@/services/movieService';
+import { findMovieById, getVideoTrailer } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { useState } from 'react';
@@ -22,7 +22,20 @@ const MoviePage = () => {
     refetchOnWindowFocus: false,
   });
 
+  const { data: trailer } = useQuery({
+    queryKey: ['trailer', id],
+    queryFn: () => getVideoTrailer(id),
+    enabled: !!id,
+    refetchOnWindowFocus: false,
+  });
+
+  const backdropImage = result ? getBackdropImage(result.backdrop_path) : null;
+
   const servers = [
+    {
+      serverName: 'Trailer',
+      serverUrl: trailer
+    },
     {
       serverName: 'Server 1',
       serverUrl: movieUrl
@@ -34,15 +47,9 @@ const MoviePage = () => {
 
   ]
 
-  let backdropImage = null;
-  if (result) {
-    backdropImage = getBackdropImage(result.backdrop_path);
-  }
-
   if (isLoading) {
     return <p className='text-white'>Loading...</p>
   };
-
 
   return (
     <div className="h-screen p-2 overflow-hidden">

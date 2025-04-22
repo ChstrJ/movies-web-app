@@ -1,4 +1,5 @@
 import apiClient from "@/api";
+import { TMDBVideo } from "@/lib/types";
 
 export const fetchPopularMovies = async (totalPages: number = 5) => {
   let request = [];
@@ -63,8 +64,20 @@ export const searchTvShows = async (keyword: string, page: number = 1) => {
   return response.data.results;
 }
 
+export const getVideoTrailer = async (id: string | undefined) => {
+  const response = await apiClient.get(`/movie/${id}/videos?language=en-US`);
+
+  const data: TMDBVideo[] = response.data.results;
+
+  const videoTrailer = data.find(item => item.site === 'YouTube' && item.type === 'Trailer');
+
+  const key = videoTrailer?.key ?? null;
+
+  return `https://www.youtube.com/embed/${key}`;
+}
+
 export const searchMulti = async (keyword: string, page: number = 1) => {
-  const response = await apiClient.get(`/search/multi?include_adult=false&query=${encodeURI(keyword)}&page=${page}`);
+  const response = await apiClient.get(`/ search / multi ? include_adult = false & query=${encodeURI(keyword)}& page=${page} `);
   const results = response.data.results;
 
   const sorted = results.sort((a: any, b: any) => {
@@ -75,17 +88,17 @@ export const searchMulti = async (keyword: string, page: number = 1) => {
 }
 
 export const movieGenre = async () => {
-  const response = await apiClient.get(`genre/movie/list?language=en`);
+  const response = await apiClient.get(`genre / movie / list ? language = en`);
   return response.data.results;
 }
 
 export const findMovieById = async (id: string | undefined) => {
-  const response = await apiClient.get(`movie/${id}?language=en-US`);
+  const response = await apiClient.get(`movie / ${id}?language = en - US`);
   return response.data;
 }
 
 export const showsDetails = async (id: number) => {
-  const response = await apiClient.get(`/tv/${id}`);
+  const response = await apiClient.get(`/ tv / ${id} `);
   return response.data.results;
 }
 
