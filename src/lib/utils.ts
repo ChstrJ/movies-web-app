@@ -21,6 +21,14 @@ export function get2embedUrl(id: string | undefined) {
   return `https://www.2embed.cc/embed/${id}`;
 }
 
+export function getMultiEmbedUrl(id: string | undefined) {
+  return `https://multiembed.to/tmdb/movie/${id}`;
+}
+
+export function getVembedUrl(id: string | undefined) {
+  return `https://vembed.net/movie/${id}`;
+}
+
 export function getMovieUrl(id: string | undefined) {
   const basePath = getVideoPath();
   return `${basePath}/movie/${id}`;
