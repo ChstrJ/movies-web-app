@@ -1,6 +1,6 @@
+import Loader from "@/components/Loader";
+import { useSeries } from "@/hooks/useSeries";
 import { getVideoPath } from "@/lib/utils";
-import { findSeriesById } from "@/services/movieService";
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 const TvShowPage = () => {
@@ -8,23 +8,17 @@ const TvShowPage = () => {
   const basePath = getVideoPath();
   const showUrl = `${basePath}/tv/${id}`;
 
-  const { data: result, isLoading } = useQuery({
-    queryKey: ['showDetails', id],
-    queryFn: () => findSeriesById(id),
-    enabled: !!id,
-    refetchOnWindowFocus: false,
-  });
+  const { data: result, isLoading } = useSeries(id);
+  console.log(result)
 
   if (isLoading) {
     return <p className='text-white'>Loading...</p>
   };
 
   return (
-    <div className="h-screen p-2 overflow-hidden">
+    <div className="min-h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>
-        {/* <div className='flex flex-row'>
-          <p>Server</p>
-        </div> */}
+        {isLoading && <Loader />}
         <div className='w-full h-[750px] relative overflow-auto'>
           <iframe src={showUrl} width="100%" height="100%" allowFullScreen></iframe>
         </div>
