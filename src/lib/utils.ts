@@ -18,7 +18,7 @@ export function getTMDBPath() {
 }
 
 export function get2embedUrl(id: string | undefined) {
-  return `https://www.2embed.to/embed/tmdb/movie/${id}`;
+  return `https://www.2embed.cc/embed/${id}`;
 }
 
 export function getMovieUrl(id: string | undefined) {
