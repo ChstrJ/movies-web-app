@@ -48,7 +48,7 @@ const MoviePage = () => {
     <div className="h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>
         <div className='w-full h-[750px] relative overflow-auto'>
-          {(showBackdrop && backdropImage) && (
+          {showBackdrop && backdropImage ? (
             <div
               className='relative w-full h-full group cursor-pointer'
               onClick={() => setShowBackdrop(false)}
@@ -62,6 +62,8 @@ const MoviePage = () => {
                 <Play className='text-white text-6xl' />
               </div>
             </div>
+          ) : (
+            <iframe src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
           )}
         </div>
         <div className='pt-2'>
