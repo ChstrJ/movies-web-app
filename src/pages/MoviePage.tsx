@@ -34,7 +34,7 @@ const MoviePage = () => {
   const servers = [
     {
       serverName: 'Trailer',
-      serverUrl: trailer
+      serverUrl: trailer ?? ''
     },
     {
       serverName: 'Server 1',
