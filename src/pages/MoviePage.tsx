@@ -5,12 +5,17 @@ import { findMovieById, getVideoTrailer } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { Play } from "lucide-react";
+import { useEffect } from 'react';
 
 const MoviePage = () => {
   const { id } = useParams();
   const movieUrl = getMovieUrl(id);
 
-  const { selectedServer, showBackdropImage, setShowBackdropImage } = useGeneralStore();
+  const { selectedServer, setSelectedServer, showBackdropImage, setShowBackdropImage } = useGeneralStore();
+
+  useEffect(() => {
+    setSelectedServer(movieUrl)
+  }, []);
 
   const { data: result, isLoading } = useQuery({
     queryKey: ['movieDetail', id],

@@ -21,7 +21,7 @@ export default function CustomTab({ data }: CustomTabProps) {
   }
 
   return (
-    <Tabs value='' className="w-full">
+    <Tabs value={selectedServer ?? ''} className="w-full">
       <TabsList className="gap-2 flex justify-start">
         {data?.map((item, index) => (
           <TabsTrigger
@@ -32,7 +32,7 @@ export default function CustomTab({ data }: CustomTabProps) {
               "border border-gray-500 text-white px-4 py-2 rounded-lg",
               "transition-all duration-300 ease-in-out",
               "hover:bg-slate-700 hover:scale-105",
-              `${(selectedServer === item.serverUrl || item.default) && 'bg-slate-700'}`
+              "data-[state=active]:bg-slate-700 data-[state=active]:text-white"
             )}
           >
             {item.serverName}
