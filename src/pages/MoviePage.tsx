@@ -1,4 +1,4 @@
-import { get2embedUrl, getBackdropImage, getImagePath, getMovieUrl, getMultiEmbedUrl, getVembedUrl } from '@/lib/utils';
+import { get2embedUrl, getBackdropImage, getImagePath, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { findMovieById, getVideoTrailer } from '@/services/movieService';
@@ -12,8 +12,6 @@ const MoviePage = () => {
   const { id } = useParams();
   const movieUrl = getMovieUrl(id);
   const twoEmbedUrl = get2embedUrl(id);
-  const multiEmbedUrl = getMultiEmbedUrl(id);
-  const vEmbedUrl = getVembedUrl(id);
 
   const src = getImagePath();
 
@@ -52,14 +50,6 @@ const MoviePage = () => {
     {
       serverName: 'Server 2',
       serverUrl: twoEmbedUrl,
-    },
-    {
-      serverName: 'Server 3',
-      serverUrl: multiEmbedUrl,
-    },
-    {
-      serverName: 'Server 4',
-      serverUrl: vEmbedUrl,
     }
   ]
 
