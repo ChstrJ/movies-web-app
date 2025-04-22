@@ -4,8 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 import { findMovieById } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
+import { useState } from 'react';
+import { result } from 'lodash';
 
 const MoviePage = () => {
+  const [showBackdrop, setShowBackdrop] = useState(true);
+
   const { id } = useParams();
   const movieUrl = getMovieUrl(id);
 
@@ -39,14 +43,18 @@ const MoviePage = () => {
     return <p className='text-white'>Loading...</p>
   };
 
+
   return (
     <div className="h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>
         <div className='w-full h-[750px] relative overflow-auto'>
-          {backdropImage && (
-            <img src={backdropImage} />
+          {showBackdrop && backdropImage ? (
+            <img
+              onClick={() => setShowBackdrop(false)}
+              src={backdropImage} alt='Test' />
+          ) : (
+            <iframe src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
           )}
-          <iframe src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
         </div>
         <div className='pt-2'>
           <CustomTab data={servers} />
