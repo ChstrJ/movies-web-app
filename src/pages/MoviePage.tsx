@@ -5,7 +5,6 @@ import { findMovieById } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { useState } from 'react';
-import { result } from 'lodash';
 
 const MoviePage = () => {
   const [showBackdrop, setShowBackdrop] = useState(true);
