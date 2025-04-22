@@ -1,4 +1,4 @@
-import { getBackdropImage, getMovieUrl } from '@/lib/utils';
+import { getBackdropImage, getImagePath, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { findMovieById, getVideoTrailer } from '@/services/movieService';
@@ -11,6 +11,7 @@ import Loader from '@/components/Loader';
 const MoviePage = () => {
   const { id } = useParams();
   const movieUrl = getMovieUrl(id);
+  const src = getImagePath();
 
   const { selectedServer, setSelectedServer, showBackdropImage, setShowBackdropImage } = useGeneralStore();
 
@@ -78,10 +79,17 @@ const MoviePage = () => {
           <CustomTab data={servers} />
         </div>
         {result && (
-          <div className='pt-2'>
-            <h1 className='text-2xl font-bold text-white'>{result?.title || result?.name}
-            </h1>
-            <p className='text-gray-400'>{result?.overview}</p>
+          <div className='flex flex-col p-2'>
+            <div className='flex flex-row'>
+              <img
+                src={`${src}/w185/${result.poster_path}`}
+                alt={result.title || result.name}
+              />
+              <h1 className='ml-4 text-2xl font-bold text-white'>{result?.title || result?.name}
+              </h1>
+              <p className='text-gray-400'>{result?.overview}</p>
+
+            </div>
           </div>
         )}
       </div>
