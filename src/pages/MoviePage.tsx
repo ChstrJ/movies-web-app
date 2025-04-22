@@ -82,14 +82,13 @@ const MoviePage = () => {
           <div className='flex flex-col p-2'>
             <div className='flex flex-row'>
               <img
-                src={`${src}/w185/${result.poster_path}`}
+                src={`${src}/w45/${result.poster_path}`}
                 alt={result.title || result.name}
               />
               <h1 className='ml-4 text-2xl font-bold text-white'>{result?.title || result?.name}
               </h1>
-              <p className='text-gray-400'>{result?.overview}</p>
-
             </div>
+            <p className='text-gray-400'>{result?.overview}</p>
           </div>
         )}
       </div>
