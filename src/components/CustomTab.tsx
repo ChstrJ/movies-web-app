@@ -5,6 +5,7 @@ import { useGeneralStore } from "@/stores/useGeneralStore"
 type Server = {
   serverUrl: string;
   serverName: string;
+  default?: boolean;
 }
 
 type CustomTabProps = {
@@ -31,7 +32,7 @@ export default function CustomTab({ data }: CustomTabProps) {
               "border border-gray-500 text-white px-4 py-2 rounded-lg",
               "transition-all duration-300 ease-in-out",
               "hover:bg-slate-700 hover:scale-105",
-              `${selectedServer === item.serverUrl && 'bg-slate-700'}`
+              `${(selectedServer === item.serverUrl || item.default) && 'bg-slate-700'}`
             )}
           >
             {item.serverName}
