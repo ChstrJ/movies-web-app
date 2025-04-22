@@ -4,16 +4,13 @@ import { useQuery } from '@tanstack/react-query';
 import { findMovieById, getVideoTrailer } from '@/services/movieService';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
-import { useState } from 'react';
 import { Play } from "lucide-react";
 
 const MoviePage = () => {
-  const [showBackdrop, setShowBackdrop] = useState(true);
-
   const { id } = useParams();
   const movieUrl = getMovieUrl(id);
 
-  const { selectedServer } = useGeneralStore();
+  const { selectedServer, showBackdropImage, setShowBackdropImage } = useGeneralStore();
 
   const { data: result, isLoading } = useQuery({
     queryKey: ['movieDetail', id],
@@ -55,10 +52,10 @@ const MoviePage = () => {
     <div className="h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>
         <div className='w-full h-[750px] relative overflow-auto'>
-          {showBackdrop && backdropImage ? (
+          {showBackdropImage && backdropImage ? (
             <div
               className='relative w-full h-full group cursor-pointer'
-              onClick={() => setShowBackdrop(false)}
+              onClick={() => setShowBackdropImage(false)}
             >
               <img
                 className='w-full h-full object-cover'

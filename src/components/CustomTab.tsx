@@ -11,10 +11,11 @@ type CustomTabProps = {
 }
 
 export default function CustomTab({ data }: CustomTabProps) {
-  const { setSelectedServer, selectedServer } = useGeneralStore();
+  const { setSelectedServer, selectedServer, setShowBackdropImage } = useGeneralStore();
 
   const handleClick = (server: string) => {
-    setSelectedServer(server)
+    setSelectedServer(server);
+    setShowBackdropImage(false);
   }
 
   return (
