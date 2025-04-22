@@ -1,4 +1,4 @@
-import { get2embedUrl, getBackdropImage, getGoDriveUrl, getImagePath, getMovieUrl } from '@/lib/utils';
+import { get2embedUrl, getBackdropImage, getGoDriveUrl, getGomoUrl, getImagePath, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
@@ -22,12 +22,12 @@ const MoviePage = () => {
   const { data: trailer } = useTrailer(id);
 
   const goDriveUrl = getGoDriveUrl(movie?.imdb_id);
+  const gomoUrl = getGomoUrl(movie?.imdb_id);
   const movieUrl = getMovieUrl(id);
   const twoEmbedUrl = get2embedUrl(id);
   const src = getImagePath();
   const backdropImage = movie ? getBackdropImage(movie.backdrop_path) : null;
 
-  console.log(movie)
   const servers = [
     {
       serverName: 'Trailer',
@@ -45,6 +45,10 @@ const MoviePage = () => {
     {
       serverName: 'Server 3',
       serverUrl: goDriveUrl,
+    },
+    {
+      serverName: 'Server 4',
+      serverUrl: gomoUrl,
     }
   ]
 

@@ -12,7 +12,7 @@ type CustomChip = {
 
 export default function CustomChip({ data, icon }: CustomChip) {
     return (
-        <span className="text-slate-900 inline-block space-x-1 text-xs">
+        <span className="text-slate-900 inline-block space-x-1 space-y-1 text-xs">
             {Array.isArray(data) ? data.map((item) => (
                 <Chip
                     key={item.id}

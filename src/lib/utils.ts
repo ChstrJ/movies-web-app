@@ -29,6 +29,10 @@ export function getGoDriveUrl(id: string | undefined) {
   return `https://godriveplayer.com/player.php?imdb=${id}`;
 }
 
+export function getGomoUrl(id: string | undefined) {
+  return `https://gomo.to/movie/${id}`;
+}
+
 
 export function getVembedUrl(id: string | undefined) {
   return `https://vembed.net/movie/${id}`;
