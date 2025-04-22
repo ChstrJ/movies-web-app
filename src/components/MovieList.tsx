@@ -7,12 +7,13 @@ import { useGeneralStore } from '@/stores/useGeneralStore.ts';
 import { SearchResult } from '@/lib/types';
 import { useSearchStore } from '@/stores/useSearchStore';
 import { cn } from '@/lib/utils';
-import { useEffect } from 'react';
+import Loader from './Loader';
 
 const MovieList = () => {
   const { page } = usePaginationStore();
   const { resultsDropdown } = useSearchStore();
-  const { setDocumentTitle, setSelectedResult, setShowBackdropImage, setSelectedServer } = useGeneralStore();
+  const { setDocumentTitle, setSelectedResult, setShowBackdropImage, setSelectedServer } =
+    useGeneralStore();
 
   const { data: movies, isLoading } = useQuery<SearchResult[]>({
     queryKey: ['movies', page],
@@ -24,15 +25,14 @@ const MovieList = () => {
     setSelectedServer(null);
   }, []);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   return (
-    <div className={cn(
-      'grid grid-cols-3 lg:grid-cols-6 transition-all duration-300',
-      resultsDropdown && 'blur-md bg-black/40 pointer-events-none cursor-not-allowed'
-    )}>
+    <div
+      className={cn(
+        'grid grid-cols-3 lg:grid-cols-6 transition-all duration-300',
+        resultsDropdown && 'blur-md bg-black/40 pointer-events-none cursor-not-allowed'
+      )}
+    >
+      {isLoading && <Loader />}
       {movies?.map(
         movie =>
           movie.poster_path &&
@@ -41,8 +41,8 @@ const MovieList = () => {
               to={`/movie/${movie.id}`}
               key={movie.id}
               onClick={() => {
-                setDocumentTitle(movie.title ?? '')
-                setSelectedResult(movie)
+                setDocumentTitle(movie.title ?? '');
+                setSelectedResult(movie);
               }}
             >
               <MovieCard img={movie.poster_path} title={movie.title} />
