@@ -5,6 +5,9 @@ import { SearchIcon } from 'lucide-react';
 import { useSearchStore } from '@/stores/useSearchStore';
 import CommandPopover from './CommandPopover';
 import { Button } from './ui/button';
+import { Menu } from 'lucide-react';
+import { useGeneralStore } from '@/stores/useGeneralStore';
+import CustomDrawer from './CustomDrawer';
 
 export default function CustomNavbar() {
   const location = useLocation();
@@ -12,12 +15,15 @@ export default function CustomNavbar() {
   const { pathname } = location;
 
   const { setResultsDropdown, resultsDropdown } = useSearchStore();
+  const { showDrawer, setShowDrawer } = useGeneralStore();
 
   const handleNavbarClick = () => {
     setResultsDropdown(false);
     document.title = 'BingeHub';
     navigate('/movies');
   };
+
+  console.log(showDrawer)
 
   const isMoviePage = /^\/movie\/\d+$/.test(pathname);
   const isShowPage = /^\/show\/\d+$/.test(pathname);
@@ -32,6 +38,14 @@ export default function CustomNavbar() {
         }
        p-2 border border-b-gray-500 rounded-b-sm`}
     >
+      <Menu
+        className='text-white cursor-pointer'
+        onClick={() => setShowDrawer(true)}
+      />
+
+      {showDrawer && (
+        <CustomDrawer open={showDrawer} />
+      )}
       <NavbarBrand
         className='cursor-pointer'
         onClick={handleNavbarClick}>

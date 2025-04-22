@@ -10,6 +10,8 @@ type generalStore = {
   setSelectedServer: (server: string | null) => void;
   showBackdropImage: boolean;
   setShowBackdropImage: (show: boolean) => void;
+  showDrawer: boolean;
+  setShowDrawer: (show: boolean) => void;
 };
 
 export const useGeneralStore = create<generalStore>(set => ({
@@ -21,4 +23,6 @@ export const useGeneralStore = create<generalStore>(set => ({
   setSelectedServer: server => set({ selectedServer: server }),
   showBackdropImage: true,
   setShowBackdropImage: show => set({ showBackdropImage: show }),
+  showDrawer: false,
+  setShowDrawer: show => set({ showDrawer: show })
 }));
