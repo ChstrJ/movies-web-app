@@ -6,6 +6,7 @@ import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { Play } from "lucide-react";
 import { useEffect } from 'react';
+import Loader from '@/components/Loader';
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -50,13 +51,10 @@ const MoviePage = () => {
 
   ]
 
-  if (isLoading) {
-    return <p className='text-white'>Loading...</p>
-  };
-
   return (
     <div className="h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>
+        {isLoading && <Loader />}
         <div className='w-full h-[750px] relative overflow-auto'>
           {showBackdropImage && backdropImage ? (
             <div
