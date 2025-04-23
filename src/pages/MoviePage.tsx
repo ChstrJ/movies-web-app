@@ -73,13 +73,13 @@ const MoviePage = () => {
               />
               <div className='ml-4 flex flex-col text-white'>
                 <h1 className='text-2xl font-bold text-white'>{movie?.title || movie?.name}</h1>
-                <p className='text-white text-xs mb-2 mt-2'>
+                <span className='text-white text-xs mb-2 mt-2'>
                   Rating: <CustomChip data={`${parseInt(movie?.vote_average)} / 10`
                   } />
-                </p>
-                <p className='text-xs'>
+                </span>
+                <span className='text-xs'>
                   Genres: <CustomChip data={movie.genres} />
-                </p>
+                </span>
                 <p className='text-gray-400 mt-2'>{movie?.overview}</p>
               </div>
             </div>
