@@ -2,6 +2,7 @@ import { useShowStore } from "@/stores/useShowStore";
 import { Button } from "./ui/button";
 import { useEpisodes } from "@/hooks/useEpisodes";
 import Loader from "./Loader";
+import { cn } from "@/lib/utils";
 
 type Season = {
   season_number: number;
@@ -29,8 +30,7 @@ export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
             <Button
               key={item.season_number}
               onClick={() => setSelectedSeason(item.season_number)}
-              className={`${selectedSeason === item.season_number ? 'bg-blue-900' : ''
-                } cursor-pointer`}
+              className={cn(`bg-sky-500/30 cursor-pointer hover:bg-sky-950 border border-sky-500/30 ${item.season_number === selectedSeason && 'bg-sky-950'}`)}
             >
               {item.season_number}
             </Button>
@@ -45,8 +45,7 @@ export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
           <Button
             key={item.episode_number}
             onClick={() => setSelectedEpisode(item.episode_number)}
-            className={`${selectedEpisode === item.episode_number ? 'bg-blue-900' : ''
-              } cursor-pointer`}
+            className={cn(`bg-sky-500/30 cursor-pointer hover:bg-sky-950 border border-sky-500/30 ${item.episode_number === selectedEpisode && 'bg-sky-950'}`)}
           >
             {item.episode_number}
           </Button>
