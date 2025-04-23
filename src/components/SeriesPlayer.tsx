@@ -20,7 +20,6 @@ export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
 
   return (
     <div className="flex flex-col text-white w-full mb-4 mt-4">
-      {isLoading && <Loader />}
       <div className="flex flex-wrap gap-2">
         Seasons: {seasons
           .filter((item) => item.season_number != 0)
@@ -33,6 +32,7 @@ export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
           ))}
       </div>
       <div className="flex flex-wrap gap-2 mt-4">
+        {isLoading && <Loader size="small" />}
         Episodes: {episodes && episodes.map((item: any) => (
           <Button
             onClick={() => setSelectedEpisode(item.episode_number)}
