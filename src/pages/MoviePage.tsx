@@ -1,4 +1,4 @@
-import { get2embedUrl, getBackdropImage, getGoDriveUrl, getGomoUrl, getImagePath, getMovieUrl } from '@/lib/utils';
+import { getBackdropImage, getImagePath, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { Play } from "lucide-react";
