@@ -1,7 +1,10 @@
 import Loader from "@/components/Loader";
+import SeriesPlayer from "@/components/SeriesPlayer";
+import { Button } from "@/components/ui/button";
 import { useSeries } from "@/hooks/useSeries";
 import { getBackdropImage, getImagePath, getVideoPath } from "@/lib/utils";
 import { useGeneralStore } from "@/stores/useGeneralStore";
+import { useShowStore } from "@/stores/useShowStore";
 import { Play } from "lucide-react";
 import { useParams } from "react-router-dom";
 
@@ -12,6 +15,8 @@ const TvShowPage = () => {
   const src = getImagePath();
 
   const { showBackdropImage, setShowBackdropImage } = useGeneralStore();
+  const { selectedSeason, selectedEpisode } = useShowStore();
+
   const { data: series, isLoading } = useSeries(id);
 
   const backdropImage = series ? getBackdropImage(series.backdrop_path) : null;
@@ -41,12 +46,13 @@ const TvShowPage = () => {
         </div>
         {series && (
           <div className='flex flex-col p-2'>
+            <SeriesPlayer id={id} seasons={series.seasons} />
             <div className='flex flex-row'>
               <img
                 src={`${src}/w154/${series.poster_path}`}
                 alt={series.title || series.name}
               />
-              <div className='flex flex-col text-white'>
+              <div className='ml-4 flex flex-col text-white'>
                 <h1 className='text-2xl font-bold text-white'>{series?.title || series?.name}</h1>
                 <p className='text-white text-xs mb-2 mt-2'>
                   Rating:

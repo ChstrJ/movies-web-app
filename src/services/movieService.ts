@@ -117,3 +117,9 @@ export const showsDetails = async (id: number) => {
   return response.data.results;
 }
 
+export const fetchEpisodes = async (id: number | string | undefined, season: number | string) => {
+  const response = await apiClient.get(`/tv/${id}/season/${season}`);
+
+  return response.data.episodes;
+}
+
