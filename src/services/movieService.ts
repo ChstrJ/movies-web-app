@@ -24,7 +24,14 @@ export const fetchPopularMovies = async (totalPages: number = 5) => {
   const responses = await Promise.all(request);
   const data = responses.flatMap((response) => response.data.results);
 
-  return data.slice(0, -4);
+  let paginate = null;
+  if (totalPages > 5) {
+    paginate = data.slice(totalPages, -4);
+  } else {
+    paginate = data.slice(0, -4);
+  }
+  return paginate;
+
 }
 
 export const fetchPopularTvShows = async (totalPages: number = 5) => {
