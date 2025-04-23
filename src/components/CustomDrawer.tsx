@@ -18,7 +18,7 @@ export default function CustomDrawer({ open }: CustomDrawerProps) {
   return (
     <Drawer open={open}>
       <DrawerContent
-        className="border border-[#252528] bg-[#09090b] text-white grid place-items-center"
+        className="border border-[#252528] bg-[#09090b] text-white flex justify-center items-center"
         onInteractOutside={() => setShowDrawer(false)}
       >
         <div className="mt-4 h-1 w-[100px] rounded-full bg-muted bg-white"></div>
@@ -26,12 +26,12 @@ export default function CustomDrawer({ open }: CustomDrawerProps) {
           <Link to={'/shows'}
             onClick={() => setShowDrawer(false)}
           >
-            <DrawerTitle className="underline text-white">Shows</DrawerTitle>
+            <DrawerTitle className="underline text-white text-center">Shows</DrawerTitle>
           </Link>
           <Link to={'/movies'}
             onClick={() => setShowDrawer(false)}
           >
-            <DrawerTitle className="underline text-white">Movies</DrawerTitle>
+            <DrawerTitle className="underline text-white text-center">Movies</DrawerTitle>
           </Link>
         </DrawerHeader>
       </DrawerContent>
