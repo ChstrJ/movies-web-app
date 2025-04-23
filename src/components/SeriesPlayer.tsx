@@ -29,7 +29,7 @@ export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
             <Button
               key={item.season_number}
               onClick={() => setSelectedSeason(item.season_number)}
-              className={`${selectedSeason === item.season_number ? 'bg-black' : ''
+              className={`${selectedSeason === item.season_number ? 'bg-blue-900' : ''
                 } cursor-pointer`}
             >
               {item.season_number}
@@ -45,7 +45,7 @@ export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
           <Button
             key={item.episode_number}
             onClick={() => setSelectedEpisode(item.episode_number)}
-            className={`${selectedEpisode === item.episode_number ? 'bg-black' : ''
+            className={`${selectedEpisode === item.episode_number ? 'bg-blue-900' : ''
               } cursor-pointer`}
           >
             {item.episode_number}

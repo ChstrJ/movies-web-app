@@ -8,6 +8,7 @@ import { useMovieDetails } from '@/hooks/useMovieDetails';
 import { useTrailer } from '@/hooks/useTrailer';
 import CustomChip from '@/components/CustomBadge';
 import ServerPlayer from '@/components/ServerPlayer';
+import { getServers } from '@/lib/data';
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -21,10 +22,7 @@ const MoviePage = () => {
   const { data: movie, isLoading } = useMovieDetails(id);
   const { data: trailer } = useTrailer(id);
 
-  const goDriveUrl = getGoDriveUrl(movie?.imdb_id);
-  const gomoUrl = getGomoUrl(movie?.imdb_id);
   const movieUrl = getMovieUrl(id);
-  const twoEmbedUrl = get2embedUrl(id);
   const src = getImagePath();
   const backdropImage = movie ? getBackdropImage(movie.backdrop_path) : null;
 
@@ -35,25 +33,7 @@ const MoviePage = () => {
     }
   ]
 
-  const servers = [
-    {
-      serverName: 'Server 1',
-      serverUrl: movieUrl,
-      default: true
-    },
-    {
-      serverName: 'Server 2',
-      serverUrl: twoEmbedUrl,
-    },
-    {
-      serverName: 'Server 3',
-      serverUrl: goDriveUrl,
-    },
-    {
-      serverName: 'Server 4',
-      serverUrl: gomoUrl,
-    }
-  ]
+  const servers = getServers(id, movie?.imdb_id);
 
   return (
     <div className="min-h-screen p-2 overflow-hidden">
@@ -84,7 +64,6 @@ const MoviePage = () => {
         <div className='pt-2'>
           <ServerPlayer name='Servers: ' data={servers} />
         </div>
-
         {movie && (
           <div className='flex flex-col p-2'>
             <div className='flex flex-row'>
