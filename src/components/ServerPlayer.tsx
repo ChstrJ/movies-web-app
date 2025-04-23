@@ -1,5 +1,6 @@
 import { useGeneralStore } from "@/stores/useGeneralStore";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 type Server = {
   serverUrl: string;
@@ -27,8 +28,7 @@ export default function ServerPlayer({ data, name }: CustomTabProps) {
               setSelectedServer(item.serverUrl)
               setShowBackdropImage(false);
             }}
-            className={`${selectedServer === item.serverUrl ? 'bg-blue-900' : ''
-              } cursor-pointer`}
+            className={cn(`bg-sky-500/30 cursor-pointer hover:bg-sky-950 border border-sky-500/30 ${item.serverUrl === selectedServer && 'bg-sky-950'}`)}
           >
             {item.serverName}
           </Button>

@@ -36,7 +36,7 @@ export default function CustomNavbar() {
        p-2 border border-b-gray-500 rounded-b-sm`}
     >
       <Menu
-        className='text-white cursor-pointer sm:hidden'
+        className='fixed text-white cursor-pointer sm:hidden w-6 h-6'
         onClick={() => setShowDrawer(true)}
       />
 
@@ -46,8 +46,8 @@ export default function CustomNavbar() {
       <NavbarBrand
         className='cursor-pointer'
         onClick={handleNavbarClick}>
-        <MovieIcon className="w-6 mr-2" />
-        <p className="font-bold text-lg text-white">
+        <MovieIcon className="w-6 mr-2 hidden sm:flex" />
+        <p className="font-bold text-sm md:text-lg text-white ml-8 md:ml-0">
           BingeHub
         </p>
       </NavbarBrand>
