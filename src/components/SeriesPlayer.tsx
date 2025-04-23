@@ -20,28 +20,39 @@ export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
 
   return (
     <div className="flex flex-col text-white w-full mb-4 mt-4">
-      <div className="flex flex-wrap gap-2">
-        Seasons: {seasons
-          .filter((item) => item.season_number != 0)
+      {/* Seasons Grid */}
+      <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
+        <p className="col-span-full font-semibold">Seasons:</p>
+        {seasons
+          .filter((item) => item.season_number !== 0)
           .map((item) => (
             <Button
-              onClick={() => setSelectedSeason(item.season_number)}
               key={item.season_number}
-              className={`${selectedSeason === item.season_number && 'bg-black'} cursor-pointer`}
-            >{item.season_number}</Button>
+              onClick={() => setSelectedSeason(item.season_number)}
+              className={`${selectedSeason === item.season_number ? 'bg-black' : ''
+                } cursor-pointer`}
+            >
+              {item.season_number}
+            </Button>
           ))}
       </div>
-      <div className="flex flex-wrap gap-2 mt-4">
+
+      {/* Episodes Grid */}
+      <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 mt-4">
+        <p className="col-span-full font-semibold">Episodes:</p>
         {isLoading && <Loader size="small" />}
-        Episodes: {episodes && episodes.map((item: any) => (
+        {episodes?.map((item: any) => (
           <Button
+            key={item.episode_number}
             onClick={() => setSelectedEpisode(item.episode_number)}
-            className={`${selectedEpisode === item.episode_number && 'bg-black'} cursor-pointer`}
+            className={`${selectedEpisode === item.episode_number ? 'bg-black' : ''
+              } cursor-pointer`}
           >
             {item.episode_number}
           </Button>
         ))}
       </div>
     </div>
-  )
+  );
+
 }
