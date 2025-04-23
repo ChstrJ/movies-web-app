@@ -15,10 +15,8 @@ type SeriesPlayerProps = {
 
 
 export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
-
   const { selectedSeason, selectedEpisode, setSelectedSeason, setSelectedEpisode } = useShowStore();
   const { data: episodes, isLoading } = useEpisodes(id, selectedSeason);
-  console.log(episodes)
 
   return (
     <div className="flex flex-col text-white w-full mb-4 mt-4">
@@ -35,7 +33,7 @@ export default function SeriesPlayer({ id, seasons }: SeriesPlayerProps) {
           ))}
       </div>
       <div className="flex gap-4 mt-4">
-        Episodes: {episodes.map((item: any) => (
+        Episodes: {episodes && episodes.map((item: any) => (
           <Button
             onClick={() => setSelectedEpisode(item.episode_number)}
             className={`${selectedEpisode === item.episode_number && 'bg-black'} cursor-pointer`}

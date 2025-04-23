@@ -1,8 +1,7 @@
 import Loader from "@/components/Loader";
 import SeriesPlayer from "@/components/SeriesPlayer";
-import { Button } from "@/components/ui/button";
 import { useSeries } from "@/hooks/useSeries";
-import { getBackdropImage, getImagePath, getVideoPath } from "@/lib/utils";
+import { getBackdropImage, getImagePath, getShowUrl } from "@/lib/utils";
 import { useGeneralStore } from "@/stores/useGeneralStore";
 import { useShowStore } from "@/stores/useShowStore";
 import { Play } from "lucide-react";
@@ -10,14 +9,14 @@ import { useParams } from "react-router-dom";
 
 const TvShowPage = () => {
   const { id } = useParams();
-  const basePath = getVideoPath();
-  const showUrl = `${basePath}/tv/${id}`;
+  //const basePath = getVideoPath();
   const src = getImagePath();
 
   const { showBackdropImage, setShowBackdropImage } = useGeneralStore();
   const { selectedSeason, selectedEpisode } = useShowStore();
-
   const { data: series, isLoading } = useSeries(id);
+
+  const showUrl = getShowUrl(id, selectedSeason, selectedEpisode)
 
   const backdropImage = series ? getBackdropImage(series.backdrop_path) : null;
 
