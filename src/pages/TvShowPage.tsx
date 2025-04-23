@@ -1,3 +1,4 @@
+import CustomChip from "@/components/CustomBadge";
 import Loader from "@/components/Loader";
 import SeriesPlayer from "@/components/SeriesPlayer";
 import { useSeries } from "@/hooks/useSeries";
@@ -54,11 +55,13 @@ const TvShowPage = () => {
               <div className='ml-4 flex flex-col text-white'>
                 <h1 className='text-2xl font-bold text-white'>{series?.title || series?.name}</h1>
                 <p className='text-white text-xs mb-2 mt-2'>
-                  Rating:
+                  Rating: <CustomChip data={`${parseInt(series?.vote_average)} / 10`
+                  } />
                 </p>
                 <p className='text-xs'>
-                  Genre:
+                  Genres: <CustomChip data={series.genres} />
                 </p>
+
                 <p className='text-gray-400 mt-2'>{series?.overview}</p>
               </div>
             </div>
