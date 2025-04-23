@@ -11,7 +11,6 @@ const TvShowPage = () => {
   const showUrl = `${basePath}/tv/${id}`;
   const src = getImagePath();
 
-
   const { showBackdropImage, setShowBackdropImage } = useGeneralStore();
   const { data: series, isLoading } = useSeries(id);
 
@@ -47,12 +46,13 @@ const TvShowPage = () => {
                 src={`${src}/w154/${series.poster_path}`}
                 alt={series.title || series.name}
               />
-              <p>Check</p>
-              <div className='md:ml-4 flex flex-col text-white'>
+              <div className='flex flex-col text-white'>
                 <h1 className='text-2xl font-bold text-white'>{series?.title || series?.name}</h1>
                 <p className='text-white text-xs mb-2 mt-2'>
+                  Rating:
                 </p>
                 <p className='text-xs'>
+                  Genre:
                 </p>
                 <p className='text-gray-400 mt-2'>{series?.overview}</p>
               </div>

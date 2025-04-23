@@ -16,8 +16,6 @@ const MovieList = () => {
 
   const { data: movies, isLoading } = useMovieList(page);
 
-  console.log(page)
-
   useEffect(() => {
     setShowBackdropImage(true);
     setSelectedServer(null);
