@@ -21,6 +21,8 @@ const TvShowPage = () => {
 
   const backdropImage = series ? getBackdropImage(series.backdrop_path) : null;
 
+  console.log(showUrl);
+
   return (
     <div className="min-h-screen p-2 overflow-hidden">
       <div className='flex flex-col'>

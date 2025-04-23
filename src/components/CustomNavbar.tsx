@@ -23,11 +23,8 @@ export default function CustomNavbar() {
     navigate('/movies');
   };
 
-  console.log(showDrawer)
-
   const isMoviePage = /^\/movie\/\d+$/.test(pathname);
   const isShowPage = /^\/show\/\d+$/.test(pathname);
-
 
   return (
     <Navbar

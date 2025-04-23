@@ -50,7 +50,7 @@ export function getBackdropImage(backdropPath: string, size: string = 'w1280') {
 
 export function getShowUrl(id: number | string | undefined, season: number, episode: number) {
   const basePath = getVideoPath();
-  return `${basePath}/tv/tt${id}/${season}/${episode}`;
+  return `${basePath}/tv/${id}/${season}/${episode}`;
 }
 
 export function getVideoTrailer(id: string | undefined) {
