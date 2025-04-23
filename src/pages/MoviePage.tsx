@@ -1,6 +1,5 @@
 import { get2embedUrl, getBackdropImage, getGoDriveUrl, getGomoUrl, getImagePath, getMovieUrl } from '@/lib/utils';
 import { useParams } from 'react-router-dom';
-import CustomTab from '@/components/CustomTab';
 import { useGeneralStore } from '@/stores/useGeneralStore';
 import { Play } from "lucide-react";
 import { useEffect } from 'react';
@@ -8,6 +7,7 @@ import Loader from '@/components/Loader';
 import { useMovieDetails } from '@/hooks/useMovieDetails';
 import { useTrailer } from '@/hooks/useTrailer';
 import CustomChip from '@/components/CustomBadge';
+import ServerPlayer from '@/components/ServerPlayer';
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -28,11 +28,14 @@ const MoviePage = () => {
   const src = getImagePath();
   const backdropImage = movie ? getBackdropImage(movie.backdrop_path) : null;
 
-  const servers = [
+  const trailers = [
     {
       serverName: 'Trailer',
       serverUrl: trailer ?? ''
-    },
+    }
+  ]
+
+  const servers = [
     {
       serverName: 'Server 1',
       serverUrl: movieUrl,
@@ -76,8 +79,12 @@ const MoviePage = () => {
           )}
         </div>
         <div className='pt-2'>
-          <CustomTab data={servers} />
+          <ServerPlayer name='Trailers: ' data={trailers} />
         </div>
+        <div className='pt-2'>
+          <ServerPlayer name='Servers: ' data={servers} />
+        </div>
+
         {movie && (
           <div className='flex flex-col p-2'>
             <div className='flex flex-row'>
