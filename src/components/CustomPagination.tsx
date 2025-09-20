@@ -22,16 +22,16 @@ export function CustomPagination() {
   return (
     <Pagination>
       <PaginationContent>
-        {page > 1 && (
+        {page > 5 && (
           <PaginationItem>
             <PaginationPrevious
-              onClick={() => setPage(page - 1)}
+              onClick={() => setPage(page - 5)}
               className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
           </PaginationItem>
         )}
         <PaginationItem>
           <PaginationNext
-            onClick={() => setPage(page + 1)}
+            onClick={() => setPage(page + 5)}
             className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
         </PaginationItem>
       </PaginationContent>
