@@ -56,7 +56,7 @@ export const fetchPopularMovies = async (page: number = 1) => {
 //   return data.slice(0, -3);
 // }
 
-export const fetchPopularTvShows = async (page: number = 5) => {
+export const fetchPopularTvShows = async (page: number = 1) => {
   const response = await apiClient.get(`/discover/tv?language=en-US&page=${page}&sort_by=vote_average.desc&vote_count.gte=200`);
 
   return response.data.results;
