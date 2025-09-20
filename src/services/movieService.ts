@@ -9,31 +9,35 @@ export const fetchMovieImdbId = async (id: string | undefined) => {
   return data?.imdb_id ?? null;
 }
 
-export const fetchPopularMovies = async (totalPages: number = 5) => {
-  let request = [];
+// export const fetchPopularMovies = async (totalPages: number = 5) => {
+//   let request = [];
 
-  if (totalPages < 5) {
-    totalPages = 5;
-  }
+//   if (totalPages < 5) {
+//     totalPages = 5;
+//   }
 
-  for (let page = 1; page <= totalPages; page++) {
-    const response = apiClient.get(`/movie/popular?language=en-US&page=${page}&region=US`);
-    request.push(response);
-  }
+//   for (let page = 1; page <= totalPages; page++) {
+//     const response = apiClient.get(`/movie/popular?language=en-US&page=${page}&region=US`);
+//     request.push(response);
+//   }
 
-  const responses = await Promise.all(request);
-  const data = responses.flatMap((response) => response.data.results);
+//   const responses = await Promise.all(request);
+//   const data = responses.flatMap((response) => response.data.results);
 
-  let paginate = null;
-  const diff = totalPages - data.length;
+//   let paginate = null;
+//   if (totalPages > 5) {
+//     paginate = data.slice(totalPages, -4);
+//   } else {
+//     paginate = data.slice(0, -4);
+//   }
+//   return paginate;
 
-  if (totalPages > 5) {
-    paginate = data.slice(totalPages, diff);
-  } else {
-    paginate = data.slice(0, diff);
-  }
-  return paginate;
+// }
+
+export const fetchPopularMovies = async (page: number = 1) => {
+  return apiClient.get(`/movie/popular?language=en-US&page=${page}&region=US`);
 }
+
 
 export const fetchPopularTvShows = async (totalPages: number = 5) => {
   let request = [];
