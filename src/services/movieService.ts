@@ -25,13 +25,14 @@ export const fetchPopularMovies = async (totalPages: number = 5) => {
   const data = responses.flatMap((response) => response.data.results);
 
   let paginate = null;
+  const diff = totalPages - data.length;
+
   if (totalPages > 5) {
-    paginate = data.slice(totalPages, -4);
+    paginate = data.slice(totalPages, diff);
   } else {
-    paginate = data.slice(0, -4);
+    paginate = data.slice(0, diff);
   }
   return paginate;
-
 }
 
 export const fetchPopularTvShows = async (totalPages: number = 5) => {
