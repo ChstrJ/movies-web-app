@@ -1,106 +1,38 @@
-import { Popover, PopoverContent } from "@/components/ui/popover"
-import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from './ui/dialog';
+import { Command, CommandInput, CommandItem, CommandList } from './ui/command';
 import { useSearchStore } from '@/stores/useSearchStore';
 import { useQuery } from '@tanstack/react-query';
 import { searchMulti } from '@/services/movieService';
-import { useCallback } from 'react';
-import { debounce } from 'lodash';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { cn, getImagePath } from '@/lib/utils';
-import { useGeneralStore } from "@/stores/useGeneralStore";
-import { SearchResult } from "@/lib/types";
+import { getImagePath } from '@/lib/utils';
+import { useGeneralStore } from '@/stores/useGeneralStore';
+import { SearchResult } from '@/lib/types';
 
-type CommandPopoverProps = {
-    open: boolean;
-};
-
-export default function CommandPopover({ open }: CommandPopoverProps) {
-    const { searchInput, setSearchInput, setResultsDropdown, setUserInput, userInput } = useSearchStore();
-    const { setDocumentTitle, setSelectedResult } = useGeneralStore();
-    const navigate = useNavigate();
-    const src = getImagePath();
-
-    const { data: results, isFetching } = useQuery<SearchResult[]>({
-        queryKey: ['all', searchInput],
-        queryFn: () => searchMulti(searchInput),
-        refetchOnWindowFocus: false,
-    });
-
-    const searchDebounce = useCallback(
-        debounce((value: string) => setSearchInput(value), 1000),
-        []
-    );
-
-    const handleChange = (value: string) => {
-        searchDebounce(value)
-        setUserInput(value);
-    };
-
-    const handleSelect = (result: any) => {
-        setResultsDropdown(false);
-        setDocumentTitle(result.title || result.name || '');
-        setSelectedResult(result);
-        setUserInput('');
-        setSearchInput('');
-        const path = result.media_type === 'tv' ? `/show/${result.id}` : `/movie/${result.id}`;
-        navigate(path);
-    };
-
-    return (
-        <Popover open={open} onOpenChange={setResultsDropdown}>
-            <PopoverContent
-                onInteractOutside={() => setResultsDropdown(false)}
-                className="mt-[6rem] h-[700px] text-[#242528] fixed flex justify-center items-center w-screen border-none shadow-none">
-                <Command
-                    className="w-full max-w-2xl border border-[#252528] bg-[#09090b] rounded-lg shadow-md [&_[data-slot=command-input-wrapper]]:h-12">
-                    <CommandInput
-                        className="h-12 w-full text-base text-white"
-                        value={userInput}
-                        onValueChange={handleChange}
-                        placeholder="Search for anything..."
-                    />
-                    <CommandList
-                        className={cn('max-h-[700px] text-white')}
-                    >
-                        {isFetching && (
-                            <CommandEmpty className="text-center text-gray-500">
-                                Searching...
-                            </CommandEmpty>)}
-                        {searchInput.length > 0 && results?.length === 0 && (
-                            <CommandEmpty className="text-center text-gray-500">
-                                No results found.
-                            </CommandEmpty>
-                        )}
-                        {results?.map((result) => (
-                            result.poster_path &&
-                            (result.release_date || result.first_air_date) &&
-                            (
-                                <CommandItem
-                                    key={result.id}
-                                    value={result.title || result.name}
-                                    className="cursor-pointer hover:text-slate-400 p-2 items-center hover:bg-[#252528] border-b border-[#252528]"
-                                    onSelect={() => handleSelect(result)}
-                                >
-                                    <div className="flex flex-col w-full">
-                                        <div className="flex flex-row gap-2 w-full items-center">
-                                            <img
-                                                src={`${src}/w45/${result.poster_path}`}
-                                                alt={result.title || result.name}
-                                            />
-                                            <p className="inline-block">{result.title || result.name}</p>
-                                            <span className="text-slate-400 rounded-md ml-2 bg-slate-900 p-1">
-                                                {result.media_type === 'movie' ? (result.release_date?.split('-')[0] ?? 'Unknown') : (result.first_air_date?.split('-')[0] ?? 'Unknown')}
-                                                {" - "}
-                                                {result.media_type === 'movie' ? 'Movie' : 'TV Show'}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </CommandItem>
-                            )
-                        ))}
-                    </CommandList>
-                </Command>
-            </PopoverContent>
-        </Popover>
-    )
+export default function CommandPopover({ open }: { open: boolean }) {
+  const { setResultsDropdown } = useSearchStore();
+  const { setDocumentTitle, setShowBackdropImage, setSelectedServer } = useGeneralStore();
+  const [input, setInput] = useState('');
+  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+  useEffect(() => { const timer = window.setTimeout(() => setQuery(input.trim()), 300); return () => window.clearTimeout(timer); }, [input]);
+  const { data, isFetching, isError } = useQuery<SearchResult[]>({ queryKey: ['search', query], queryFn: () => searchMulti(query), enabled: open && query.length > 0 });
+  const results = data?.filter(result => result.poster_path && (result.media_type === 'movie' || result.media_type === 'tv'));
+  const select = (result: SearchResult) => {
+    setResultsDropdown(false); setDocumentTitle(result.title || result.name || 'BingeHub');
+    setShowBackdropImage(true); setSelectedServer(null); setInput(''); setQuery('');
+    navigate(`/${result.media_type === 'tv' ? 'show' : 'movie'}/${result.id}`);
+  };
+  return <Dialog open={open} onOpenChange={setResultsDropdown}><DialogContent className="search-dialog">
+    <DialogTitle>Find your next favorite</DialogTitle><DialogDescription>Search the world of movies and shows.</DialogDescription>
+    <Command shouldFilter={false} className="bg-transparent"><CommandInput value={input} onValueChange={setInput} placeholder="Search movies & shows…" aria-label="Search movies and shows" />
+      <CommandList className="max-h-[min(55svh,480px)]">
+        {!query && <p className="search-message">Every great story starts somewhere. Search for a title.</p>}
+        {isFetching && <p className="search-message" role="status">Finding stories…</p>}
+        {isError && <p className="search-message" role="alert">Search is unavailable right now. Please try again.</p>}
+        {query && !isFetching && !isError && results?.length === 0 && <p className="search-message">No titles found. Try another search.</p>}
+        {!isFetching && query && results?.map(result => <CommandItem key={`${result.media_type}-${result.id}`} value={`${result.media_type}-${result.id}`} onSelect={() => select(result)} className="search-result"><img src={`${getImagePath()}/w92/${result.poster_path}`} alt="" /><div><span>{result.title || result.name}</span><small>{result.media_type === 'tv' ? 'Series' : 'Movie'} · {(result.release_date || result.first_air_date)?.slice(0, 4) || 'Release date unavailable'}</small></div></CommandItem>)}
+      </CommandList>
+    </Command>
+  </DialogContent></Dialog>;
 }

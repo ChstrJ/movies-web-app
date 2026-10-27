@@ -45,7 +45,7 @@ export function getMovieUrl(id: string | undefined) {
 
 export function getBackdropImage(backdropPath: string, size: string = 'w1280') {
   const imagePath = getImagePath();
-  return `${imagePath}/t/p/${size}/${backdropPath}`
+  return `${imagePath}/${size}/${backdropPath}`
 }
 
 export function getShowUrl(id: number | string | undefined, season: number, episode: number) {

@@ -1,40 +1,8 @@
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
-// import { useMovieStore } from "@/stores/useMovieStore";
-import { usePaginationStore } from "@/stores/usePaginationStore";
-// import { useShowStore } from "@/stores/useShowStore";
-// import { useLocation } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { usePaginationStore } from '@/stores/usePaginationStore';
 
 export function CustomPagination() {
   const { page, setPage } = usePaginationStore();
-  // const location = useLocation();
-
-  // const { moviePage, setMoviePage } = useMovieStore();
-  // const { showPage, setShowPage } = useShowStore();
-
-  // const { pathname } = location;
-
-  return (
-    <Pagination>
-      <PaginationContent>
-        {page > 5 && (
-          <PaginationItem>
-            <PaginationPrevious
-              onClick={() => setPage(page - 5)}
-              className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
-          </PaginationItem>
-        )}
-        <PaginationItem>
-          <PaginationNext
-            onClick={() => setPage(page + 5)}
-            className="text-white hover:text-gray-400 duration-300 ease-in-out" href="#" />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
-  )
+  const changePage = (next: number) => { setPage(next); window.scrollTo({ top: 0 }); };
+  return <nav className="catalog-pagination" aria-label="Collection pages"><button className="button-secondary" disabled={page <= 1} onClick={() => changePage(Math.max(1, page - 5))}><ArrowLeft size={17} />Previous</button><span>Collection {Math.ceil(page / 5)}</span><button className="button-secondary" onClick={() => changePage(page + 5)}>Next collection<ArrowRight size={17} /></button></nav>;
 }

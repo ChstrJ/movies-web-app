@@ -24,3 +24,8 @@ dist-ssr
 *.swa
 
 .env
+
+
+.agents
+data
+.aider-desk

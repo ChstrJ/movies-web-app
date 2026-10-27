@@ -16,8 +16,9 @@ const MoviePage = () => {
   const { selectedServer, setSelectedServer, showBackdropImage, setShowBackdropImage } = useGeneralStore();
 
   useEffect(() => {
-    setSelectedServer(movieUrl)
-  }, []);
+    setSelectedServer(null);
+    setShowBackdropImage(true);
+  }, [id, setSelectedServer, setShowBackdropImage]);
 
   const { data: movie, isLoading } = useMovieDetails(id);
   const { data: trailer } = useTrailer(id);
@@ -35,14 +36,17 @@ const MoviePage = () => {
 
   const servers = getServers(id, movie?.imdb_id);
 
+  if (isLoading) return <Loader />;
+
   return (
-    <div className="min-h-screen p-2 overflow-hidden">
+    <div className="detail-page">
       <div className='flex flex-col'>
         {isLoading && <Loader />}
-        <div className='w-full h-[750px] relative overflow-auto'>
+        <div className='playback-frame'>
           {showBackdropImage && backdropImage ? (
-            <div
-              className='relative w-full h-full group cursor-pointer'
+            <button
+              className='backdrop-button'
+              aria-label='Start playback'
               onClick={() => setShowBackdropImage(false)}
             >
               <img
@@ -50,12 +54,12 @@ const MoviePage = () => {
                 src={backdropImage}
                 alt='Backdrop'
               />
-              <div className='absolute inset-0 bg-black/50 flex items-center justify-center duration-300'>
-                <Play className='text-white text-6xl' />
+              <div className='playback-overlay'>
+                <Play fill='currentColor' /><span>Start watching</span>
               </div>
-            </div>
+            </button>
           ) : (
-            <iframe src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
+            <iframe title="Video player" src={selectedServer ?? movieUrl} width="100%" height="100%" allowFullScreen></iframe>
           )}
         </div>
         <div className='pt-2'>
@@ -66,7 +70,7 @@ const MoviePage = () => {
         </div>
         {movie && (
           <div className='flex flex-col p-2'>
-            <div className='flex flex-row'>
+            <div className='title-details'>
               <img
                 src={`${src}/w154/${movie.poster_path}`}
                 alt={movie.title || movie.name}

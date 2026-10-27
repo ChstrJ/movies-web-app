@@ -1,25 +1,11 @@
-import { getImagePath } from "@/lib/utils";
-import { Play } from "lucide-react";
+import { getImagePath } from '@/lib/utils';
+import { Play } from 'lucide-react';
 
-type MovieCardProps = {
-  img?: string;
-  title?: string;
-};
-
-const MovieCard = ({ img, title }: MovieCardProps) => {
-  const src = getImagePath();
-  return (
-    <div className="relative aspect-[2/3] overflow-hidden group">
-      <img
-        src={`${src}/w500/${img}`}
-        alt={title}
-        className="object-cover w-full h-full transition-all duration-300 group-hover:scale-110 group-hover:blur-[1px]"
-      />
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <Play className="w-16 h-16 text-white" />
-      </div>
-    </div>
-  );
-};
-
-export default MovieCard;
+type MovieCardProps = { img?: string; title?: string; year?: string; rating?: number };
+export default function MovieCard({ img, title = 'Untitled', year, rating }: MovieCardProps) {
+  return <article className="movie-card"><div className="poster-wrap">
+    <img src={`${getImagePath()}/w500/${img}`} alt={title} loading="lazy" />
+    {rating != null && rating > 0 && <span className="poster-rating">★ {rating.toFixed(1)}</span>}
+    <div className="poster-overlay"><span className="poster-play"><Play size={21} fill="currentColor" /></span><span>Explore title</span></div>
+  </div><h3>{title}</h3><p>{year || 'Discover more'}</p></article>;
+}

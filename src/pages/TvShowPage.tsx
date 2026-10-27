@@ -6,6 +6,7 @@ import { getBackdropImage, getImagePath, getShowUrl } from "@/lib/utils";
 import { useGeneralStore } from "@/stores/useGeneralStore";
 import { useShowStore } from "@/stores/useShowStore";
 import { Play } from "lucide-react";
+import { useEffect } from 'react';
 import { useParams } from "react-router-dom";
 
 const TvShowPage = () => {
@@ -17,18 +18,23 @@ const TvShowPage = () => {
   const { selectedSeason, selectedEpisode } = useShowStore();
   const { data: series, isLoading } = useSeries(id);
 
+  useEffect(() => { setShowBackdropImage(true); }, [id, setShowBackdropImage]);
+
   const showUrl = getShowUrl(id, selectedSeason, selectedEpisode)
 
   const backdropImage = series ? getBackdropImage(series.backdrop_path) : null;
 
+  if (isLoading) return <Loader />;
+
   return (
-    <div className="min-h-screen p-2 overflow-hidden">
+    <div className="detail-page">
       <div className='flex flex-col'>
         {isLoading && <Loader />}
-        <div className='w-full h-[750px] relative overflow-auto'>
+        <div className='playback-frame'>
           {showBackdropImage && backdropImage ? (
-            <div
-              className='relative w-full h-full group cursor-pointer'
+            <button
+              className='backdrop-button'
+              aria-label='Start playback'
               onClick={() => setShowBackdropImage(false)}
             >
               <img
@@ -36,18 +42,18 @@ const TvShowPage = () => {
                 src={backdropImage}
                 alt='Backdrop'
               />
-              <div className='absolute inset-0 bg-black/50 flex items-center justify-center duration-300'>
-                <Play className='text-white text-6xl' />
+              <div className='playback-overlay'>
+                <Play fill='currentColor' /><span>Start watching</span>
               </div>
-            </div>
+            </button>
           ) : (
-            <iframe src={showUrl} width="100%" height="100%" allowFullScreen></iframe>
+            <iframe title="Video player" src={showUrl} width="100%" height="100%" allowFullScreen></iframe>
           )}
         </div>
         {series && (
           <div className='flex flex-col p-2'>
             <SeriesPlayer id={id} seasons={series.seasons} />
-            <div className='flex flex-row'>
+            <div className='title-details'>
               <img
                 src={`${src}/w154/${series.poster_path}`}
                 alt={series.title || series.name}
